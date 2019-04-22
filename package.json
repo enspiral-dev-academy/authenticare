@@ -1,0 +1,33 @@
+{
+  "name": "authenticare",
+  "version": "0.1.0",
+  "description": "A JWT helper library for full-stack Node apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/don-smith/authenticare.git"
+  },
+  "keywords": [
+    "auth",
+    "jwt",
+    "nodejs"
+  ],
+  "author": "Don Smith <don@antiantonym.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/don-smith/authenticare/issues"
+  },
+  "homepage": "https://github.com/don-smith/authenticare#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "libsodium-wrappers-sumo": "^0.7.4"
+  },
+  "devDependencies": {
+    "jest": "^24.7.1"
+  }
+}
