@@ -1,19 +1,20 @@
 const localStorage = global.window.localStorage
-const TOKEN = 'token'
+const localStorageKeyName = 'token'
 
 module.exports = {
+  localStorageKeyName,
   saveToken,
   getToken
 }
 
-function saveToken (token) {
+function saveToken (token, storage = localStorage) {
   if (!token) {
-    localStorage.removeItem(TOKEN)
+    storage.removeItem(localStorageKeyName)
   } else {
-    localStorage.setItem(TOKEN, token)
+    storage.setItem(localStorageKeyName, token)
   }
 }
 
-function getToken () {
-  return localStorage.getItem(TOKEN)
+function getToken (storage = localStorage) {
+  return storage.getItem(localStorageKeyName)
 }

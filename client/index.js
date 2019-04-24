@@ -1,21 +1,19 @@
 const request = require('./request')
-const { signInUrl, registerUrl } = require('../constants')
+const { signInUrl, registerUrl } = require('../endpoints')
 
 const {
   logOff,
   getAuthToken,
-  saveAuthToken,
   isAuthenticated,
   getEncodedToken } = require('./auth')
 
 module.exports = {
   signIn,
+  logOff,
   register,
   isAuthenticated,
   getEncodedToken,
-  saveToken: saveAuthToken,
-  getToken: getAuthToken,
-  logOff
+  getToken: getAuthToken
 }
 
 function register (newUser, options) {
