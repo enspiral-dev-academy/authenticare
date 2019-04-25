@@ -40,7 +40,7 @@ describe('isAuthenticated', () => {
   })
 
   it('logs off the user if token has expired', () => {
-    expect.hasAssertions() // in case saveToken is never called
+    expect.assertions(2) // in case saveToken is never called
     jest.doMock('../../client/token-storage', () => ({
       getToken: () => 'test-token',
       saveToken: token => {
@@ -133,7 +133,7 @@ describe('getEncodedToken', () => {
 
 describe('logOff', () => {
   it('attempts to save a null token', () => {
-    expect.hasAssertions()
+    expect.assertions(1)
     jest.doMock('../../client/token-storage', () => ({
       saveToken: token => {
         expect(token).toBeNull()

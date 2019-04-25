@@ -60,7 +60,7 @@ describe('the request function', () => {
   })
 
   it('requires a data object', () => {
-    expect.hasAssertions() // in case the catch isn't reached
+    expect.assertions(1) // in case the catch isn't reached
     const scope = nock(rootUrl)
       .post(signInUrl)
       .reply(500)
@@ -75,7 +75,7 @@ describe('the request function', () => {
   })
 
   it('requires the data parameter have a username property', () => {
-    expect.hasAssertions() // in case the catch isn't reached
+    expect.assertions(1) // in case the catch isn't reached
     const scope = nock(rootUrl)
       .post(signInUrl)
       .reply(500)
@@ -90,7 +90,7 @@ describe('the request function', () => {
   })
 
   it('requires the data parameter have a username property', () => {
-    expect.hasAssertions() // in case the catch isn't reached
+    expect.assertions(1) // in case the catch isn't reached
     const scope = nock(rootUrl)
       .post(signInUrl)
       .reply(500)
