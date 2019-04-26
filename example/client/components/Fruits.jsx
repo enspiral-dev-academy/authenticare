@@ -9,7 +9,7 @@ import {
   deleteFruit
 } from '../api'
 
-export default () => {
+export default function Fruits () {
   const [fruits, setFruits] = useState([])
   const [adding, setAdding] = useState({})
   const [editing, setEditing] = useState({})

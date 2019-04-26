@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
-export default () => {
+export default function SignIn () {
   const [form, setForm] = useState({
     username: '',
     password: ''
