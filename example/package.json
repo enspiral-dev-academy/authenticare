@@ -1,0 +1,79 @@
+{
+  "name": "authenticare-example",
+  "description": "An example of how to use the npm authenticare package",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "run-p dev:server dev:client",
+    "dev:server": "nodemon server",
+    "dev:client": "npm run build -- --watch",
+    "knex": "knex --knexfile server/db/knexfile.js",
+    "db-reset": "run-s db:*",
+    "db:delete": "rm server/db/dev.sqlite3",
+    "db:migrate": "npm run knex migrate:latest",
+    "db:seed": "npm run knex seed:run",
+    "build": "webpack --config client/webpack.config.js",
+    "postinstall": "run-s db:migrate db:seed",
+    "test:units": "jest tests/client/components tests/server",
+    "test": "run-s build test:units"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "babel-plugin-styled-components",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "./tests/client/config/jsdom.js",
+      "./tests/client/config/enzyme.js"
+    ]
+  },
+  "dependencies": {
+    "authenticare": "^0.3.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "knex": "^0.16.5",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-cypress": "^2.2.1",
+    "eslint-plugin-import": "^2.17.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.1.0",
+    "jsdom": "^11.8.0",
+    "nodemon": "^1.17.3",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-router-dom": "^5.0.0",
+    "styled-components": "^4.2.0",
+    "superagent": "^5.0.2",
+    "supertest": "^4.0.2",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  }
+}

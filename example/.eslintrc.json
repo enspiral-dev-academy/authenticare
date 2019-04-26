@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "cypress/globals": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:cypress/recommended",
+    "plugin:react/recommended",
+    "standard"
+  ],
+  "plugins": [
+    "node",
+    "promise",
+    "standard",
+    "react",
+    "cypress",
+    "chai-friendly"
+  ],
+  "rules": {
+    "react/prop-types": "off",
+    "eol-last": ["error", "always"],
+    "object-curly-spacing": [2, "always"],
+    "no-multiple-empty-lines": [
+      "error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }
+    ],
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
+  }
+}
