@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { register, isAuthenticated } from 'authenticare/client'
 
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
-export default function Register () {
+export default function Register (props) {
   const [form, setForm] = useState({
     username: '',
     password: ''
@@ -16,7 +17,17 @@ export default function Register () {
   }
 
   const handleClick = () => {
-    // dispatch register
+    register({
+      username: form.username,
+      password: form.password
+    }, {
+      baseUrl: process.env.BASE_API_URL // see .env and webpack.config.js
+    })
+      .then((token) => {
+        if (isAuthenticated()) {
+          props.history.push('/')
+        }
+      })
   }
 
   return (
@@ -33,7 +44,7 @@ export default function Register () {
           value={form.password}
           onChange={handleChange} />
 
-        <Button onClick={handleClick}>Register</Button>
+        <Button type='button' onClick={handleClick}>Register</Button>
       </GridForm>
     </React.Fragment>
   )

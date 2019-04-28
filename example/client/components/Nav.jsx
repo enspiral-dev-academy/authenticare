@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { logOff } from 'authenticare/client'
 
-const NavLink = styled(Link)`
-  margin-right: 30px;
-`
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 const NavGroup = styled.div`
   float: right;
+`
+
+const NavLink = styled(Link)`
+  margin-right: 30px;
 `
 
 export default function Nav () {
@@ -15,8 +18,14 @@ export default function Nav () {
     <React.Fragment>
       <NavGroup>
         <NavLink to='/'>Home</NavLink>
-        <NavLink to='/register'>Register</NavLink>
-        <NavLink to='/signin'>Sign in</NavLink>
+        <IfAuthenticated>
+          <NavLink to='#' data-testid='logoff'
+            onClick={logOff}>Log off</NavLink>
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <NavLink to='/register' data-testid='register'>Register</NavLink>
+          <NavLink to='/signin' data-testid='signin'>Sign in</NavLink>
+        </IfNotAuthenticated>
       </NavGroup>
       <h1>Fruit FTW!</h1>
     </React.Fragment>

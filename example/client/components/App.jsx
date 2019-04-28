@@ -8,13 +8,11 @@ import SignIn from './SignIn'
 
 export default function App () {
   return (
-    <React.Fragment>
-      <Router>
-        <Route path='/' component={Nav} />
-        <Route exact path='/' component={Fruits} />
-        <Route path='/register' component={Register} />
-        <Route path='/signin' component={SignIn} />
-      </Router>
-    </React.Fragment>
+    <Router>
+      <Route path='/' component={Nav} />
+      <Route exact path='/' component={Fruits} />
+      <Route path='/register' component={Register} />
+      <Route path='/signin' component={SignIn} />
+    </Router>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+import { IfAuthenticated } from './Authenticated'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
 import {
@@ -79,7 +80,9 @@ export default function Fruits () {
       <ul>
         {fruits.map(fruit => (
           <li key={fruit.id}>
-            <a href='#' onClick={getSelectHandler(fruit.id)}>
+            <a href='#'
+              data-testid='fruit-link'
+              onClick={getSelectHandler(fruit.id)}>
               {fruit.name}
             </a>
           </li>
@@ -90,33 +93,45 @@ export default function Fruits () {
       <GridForm>
         <ColOne>Name:</ColOne>
         <ColTwo name='name'
+          data-testid='selected-name'
           value={editingName || ''}
           onChange={handleEditChange} />
 
         <ColOne>Calories:</ColOne>
         <ColTwo name='calories'
+          data-testid='selected-calories'
           value={editingCalories || ''}
           onChange={handleEditChange} />
 
-        <Button type='button' onClick={handleUpdate}>Update fruit</Button>
-        <Button type='button' onClick={handleDelete}>Delete fruit</Button>
-        <Button type='button' onClick={clearSelected}>Clear selection</Button>
+        <IfAuthenticated>
+          <Button type='button'
+            data-testid='update-button'
+            onClick={handleUpdate}>Update fruit</Button>
+          <Button type='button'
+            data-testid='delete-button'
+            onClick={handleDelete}>Delete fruit</Button>
+        </IfAuthenticated>
+        <Button type='button'
+          data-testid='clear-button'
+          onClick={clearSelected}>Clear selection</Button>
       </GridForm>
 
-      <h2>Add new</h2>
-      <GridForm>
-        <ColOne>Name:</ColOne>
-        <ColTwo name='name'
-          value={addingName || ''}
-          onChange={handleAddChange} />
+      <IfAuthenticated>
+        <h2>Add new</h2>
+        <GridForm>
+          <ColOne>Name:</ColOne>
+          <ColTwo name='name'
+            value={addingName || ''}
+            onChange={handleAddChange} />
 
-        <ColOne>Calories:</ColOne>
-        <ColTwo name='calories'
-          value={addingCalories || ''}
-          onChange={handleAddChange} />
+          <ColOne>Calories:</ColOne>
+          <ColTwo name='calories'
+            value={addingCalories || ''}
+            onChange={handleAddChange} />
 
-        <Button type='button' onClick={handleAdd}>Add fruit</Button>
-      </GridForm>
+          <Button type='button' onClick={handleAdd}>Add fruit</Button>
+        </GridForm>
+      </IfAuthenticated>
     </React.Fragment>
   )
 }
