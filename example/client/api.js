@@ -13,30 +13,27 @@ export function getFruits (url = rootUrl) {
 }
 
 export function addFruit (fruit, url = rootUrl) {
-  const token = getEncodedToken()
   return request.post(url)
     .set({ 'Accept': 'application/json' })
-    .set({ 'Authorization': `Bearer ${token}` })
+    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
     .send(fruit)
     .then(res => res.body.fruits)
     .catch(logError)
 }
 
 export function updateFruit (fruit, url = rootUrl) {
-  const token = getEncodedToken()
   return request.put(url)
     .set({ 'Accept': 'application/json' })
-    .set({ 'Authorization': `Bearer ${token}` })
+    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
     .send(fruit)
     .then(res => res.body.fruits)
     .catch(logError)
 }
 
 export function deleteFruit (id, url = rootUrl) {
-  const token = getEncodedToken()
   return request.delete(`${url}/${id}`)
     .set({ 'Accept': 'application/json' })
-    .set({ 'Authorization': `Bearer ${token}` })
+    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
     .then(res => res.body.fruits)
     .catch(logError)
 }
