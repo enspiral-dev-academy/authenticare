@@ -1,4 +1,5 @@
 const express = require('express')
+const { decodeToken } = require('authenticare/server')
 
 const db = require('../db/db')
 
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
 })
 
 // POST /api/v1/fruits
-router.post('/', async (req, res) => {
+router.post('/', decodeToken, async (req, res) => {
   const newFruit = req.body
   try {
     const fruits = await db.addFruit(newFruit)
@@ -28,7 +29,7 @@ router.post('/', async (req, res) => {
 })
 
 // PUT /api/v1/fruits
-router.put('/', async (req, res) => {
+router.put('/', decodeToken, async (req, res) => {
   const newFruit = req.body
   try {
     const fruits = await db.updateFruit(newFruit)
@@ -39,7 +40,7 @@ router.put('/', async (req, res) => {
 })
 
 // DELETE /api/v1/fruits
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', decodeToken, async (req, res) => {
   const id = Number(req.params.id)
   try {
     const fruits = await db.deleteFruit(id)
