@@ -2,7 +2,7 @@
 
 ## Overview
 
-`isAuthenticated` returns a boolean based on if the user has been authenticated.
+Returns a boolean based on if the user has been authenticated.
 
 
 ## Parameters

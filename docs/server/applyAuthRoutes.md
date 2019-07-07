@@ -2,7 +2,7 @@
 
 ## Overview
 
-`applyAuthRoutes` adds two routes to the router supplied.
+Adds two routes to the router supplied.
 
 - POST `/auth/register`
 - POST `/auth/signin`
