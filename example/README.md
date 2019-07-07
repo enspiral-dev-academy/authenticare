@@ -46,4 +46,6 @@ At this point you can start the server with `npm run dev` and send registration 
 
 ### 2. Create a registration page
 
-1. 
+...
+
+_this README is incomplete and will be completed later_
