@@ -93,7 +93,7 @@ describe('saveAuthToken', () => {
   })
 })
 
-describe('getAuthToken', () => {
+describe('getDecodedToken', () => {
   it('returns a decoded token when token is present', () => {
     jest.doMock('../../client/token-storage', () => ({
       getToken: () => 'test-token'
@@ -107,7 +107,7 @@ describe('getAuthToken', () => {
     })
 
     const auth = require('../../client/auth')
-    expect(auth.getAuthToken().sub).toBe('token-test')
+    expect(auth.getDecodedToken().sub).toBe('token-test')
   })
 
   it('returns null if no token is present', () => {
@@ -116,7 +116,7 @@ describe('getAuthToken', () => {
     }))
 
     const auth = require('../../client/auth')
-    expect(auth.getAuthToken()).toBeNull()
+    expect(auth.getDecodedToken()).toBeNull()
   })
 })
 
