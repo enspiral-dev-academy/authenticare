@@ -7,16 +7,16 @@ module.exports = {
   getUserByName
 }
 
-function createUser (username, password, db = connection) {
-  return userExists(username, db)
+function createUser (user, db = connection) {
+  return userExists(user.username, db)
     .then(exists => {
       if (exists) {
         return Promise.reject(new Error('User exists'))
       }
     })
-    .then(() => generateHash(password))
+    .then(() => generateHash(user.password))
     .then(passwordHash => {
-      return db('users').insert({ username, hash: passwordHash })
+      return db('users').insert({ user.username, hash: passwordHash })
     })
 }
 

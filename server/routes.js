@@ -1,3 +1,5 @@
+const express = require('express')
+
 const hash = require('./hash')
 const token = require('./token')
 const { registerUrl, signInUrl } = require('../endpoints')
@@ -14,6 +16,7 @@ module.exports = {
 function applyAuthRoutes (router, functions) {
   const issueToken = token.getIssuer(functions.getUserByName)
 
+  router.use(express.json())
   router.post(registerUrl, register, issueToken)
   router.post(signInUrl, signIn, issueToken)
 
@@ -25,7 +28,7 @@ function applyAuthRoutes (router, functions) {
             errorType: USERNAME_UNAVAILABLE
           })
         }
-        functions.createUser(req.body.username, req.body.password)
+        functions.createUser(req.body)
           .then(() => next())
       })
       .catch(() => {

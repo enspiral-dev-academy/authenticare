@@ -2,10 +2,10 @@ const request = require('./request')
 const { signInUrl, registerUrl } = require('../endpoints')
 
 const {
-  logOff,
-  getAuthToken,
   isAuthenticated,
-  getEncodedToken } = require('./auth')
+  getDecodedToken,
+  getEncodedToken,
+  logOff } = require('./auth')
 
 module.exports = {
   signIn,
@@ -13,7 +13,8 @@ module.exports = {
   register,
   isAuthenticated,
   getEncodedToken,
-  getToken: getAuthToken
+  getDecodedToken,
+  getAuthorizationHeader
 }
 
 function register (newUser, options) {
@@ -26,4 +27,10 @@ function signIn (user, options) {
   const baseUrl = options && options.baseUrl
   const url = `${baseUrl || ''}${signInUrl}`
   return request(url, user)
+}
+
+function getAuthorizationHeader () {
+  return {
+    "Authorization": `Bearer ${getEncodedToken()}`
+  }
 }

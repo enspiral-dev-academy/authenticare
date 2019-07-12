@@ -1,11 +1,12 @@
 import request from 'superagent'
-import { getEncodedToken } from 'authenticare/client'
+import { getAuthorizationHeader } from 'authenticare/client'
 
 const rootUrl = '/api/v1/fruits'
+const acceptJsonHeader = { 'Accept': 'application/json' }
 
 export function getFruits (url = rootUrl) {
   return request.get(url)
-    .set({ 'Accept': 'application/json' })
+    .set(acceptJsonHeader)
     .then(res => {
       return res.body.fruits
     })
@@ -14,8 +15,8 @@ export function getFruits (url = rootUrl) {
 
 export function addFruit (fruit, url = rootUrl) {
   return request.post(url)
-    .set({ 'Accept': 'application/json' })
-    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
+    .set(acceptJsonHeader)
+    .set(getAuthorizationHeader())
     .send(fruit)
     .then(res => res.body.fruits)
     .catch(logError)
@@ -23,8 +24,8 @@ export function addFruit (fruit, url = rootUrl) {
 
 export function updateFruit (fruit, url = rootUrl) {
   return request.put(url)
-    .set({ 'Accept': 'application/json' })
-    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
+    .set(acceptJsonHeader)
+    .set(getAuthorizationHeader())
     .send(fruit)
     .then(res => res.body.fruits)
     .catch(logError)
@@ -32,8 +33,8 @@ export function updateFruit (fruit, url = rootUrl) {
 
 export function deleteFruit (id, url = rootUrl) {
   return request.delete(`${url}/${id}`)
-    .set({ 'Accept': 'application/json' })
-    .set({ 'Authorization': `Bearer ${getEncodedToken()}` })
+    .set(acceptJsonHeader)
+    .set(getAuthorizationHeader())
     .then(res => res.body.fruits)
     .catch(logError)
 }
