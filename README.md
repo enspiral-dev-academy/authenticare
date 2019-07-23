@@ -1,4 +1,4 @@
-# Authenticare
+#  Authenticare
 
 > A JWT helper library for full-stack Node apps
 
@@ -18,6 +18,13 @@ You can find the docs for the most important functions exported for both client-
 ### Non-breaking changes
 
 * Updated dependencies to fix known security vulnerabilities
+
+
+## Version `0.4.1`
+
+### Non-breaking changes
+
+* Prevent publishing the tutorial in the npm package
 
 
 ## Version `0.4.0`
