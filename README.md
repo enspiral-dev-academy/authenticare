@@ -6,6 +6,20 @@ You can find an example fullstack application in the `example` folder.
 
 You can find the docs for the most important functions exported for both client-side and server-side use in the `docs` folder.
 
+## Version `0.4.3`
+
+### Non-breaking changes
+
+* Updated dependencies to fix known security vulnerabilities
+
+
+## Version `0.4.2`
+
+### Non-breaking changes
+
+* Updated dependencies to fix known security vulnerabilities
+
+
 ## Version `0.4.0`
 
 ### Non-breaking changes
