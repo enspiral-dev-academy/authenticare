@@ -1,6 +1,6 @@
 {
   "name": "authenticare",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A JWT helper library for full-stack Node apps",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,11 @@
     "url": "https://github.com/don-smith/authenticare/issues"
   },
   "jest": {
-    "testPathIgnorePatterns": ["node_modules", "example", "tutorial"]
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "example",
+      "tutorial"
+    ]
   },
   "homepage": "https://github.com/don-smith/authenticare#readme",
   "dependencies": {
