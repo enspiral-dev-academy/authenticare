@@ -46,9 +46,9 @@ However, if you'd rather jump into the deep end without as much guidance, here a
 
 ### 6. Server-side: Protect routes from unauthenticated requests
 
-  `decodeToken`
+  `getTokenDecoder`
 
-  - [Docs](https://github.com/don-smith/authenticare/blob/master/docs/server/decodeToken.md)
+  - [Docs](https://github.com/don-smith/authenticare/blob/master/docs/server/getTokenDecoder.md)
   - [Example](https://github.com/don-smith/authenticare/blob/master/example/server/routes/fruit.js)
 
 ### 7. Client-side: Send the authorization token with each request

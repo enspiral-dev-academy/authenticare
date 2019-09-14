@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken')
 const verifyJwt = require('express-jwt')
 
-const testSecret = require('../testing/testSecret')
+const testSecret = require('../testing/server/testSecret')
 
 module.exports = {
   decode,
   getIssuer,
-  createToken
+  createToken,
+  getTokenDecoder
 }
 
 function getIssuer (getUserByName) {
@@ -22,7 +23,20 @@ function getIssuer (getUserByName) {
   }
 }
 
+function getTokenDecoder (throwNoTokenError = true) {
+  return (req, res, next) => {
+    verifyJwt({
+      secret: getSecret,
+      credentialsRequired: throwNoTokenError
+    })(req, res, next)
+  }
+}
+
 function decode (req, res, next) {
+  // eslint-disable-next-line no-console
+  console.warn('authenticare/server:',
+    'decodeToken has been deprecated and will be removed in v0.5.0.',
+    'Recommend using getTokenDecoder instead. See docs for use.')
   verifyJwt({
     secret: getSecret
   })(req, res, next)

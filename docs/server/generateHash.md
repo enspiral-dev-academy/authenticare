@@ -38,4 +38,3 @@ function createUser (username, password, db = connection) {
     })
 }
 ```
-

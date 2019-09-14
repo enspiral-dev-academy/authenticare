@@ -1,5 +1,7 @@
 # `decodeToken`
 
+> **IMPORTANT** This function has been deprecated and will be removed in version 0.5.0. You should use [`getTokenDecoder`](getTokenDecoder.md) instead.
+
 ## Overview
 
 This Express middleware function reads the `Authorization` header off of the HTTP request and decodes it. It then places the contents of the token on the `req.user` property.
@@ -34,4 +36,3 @@ router.post('/', decodeToken, async (req, res) => {
   }
 })
 ```
-

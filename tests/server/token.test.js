@@ -1,6 +1,6 @@
 beforeEach(() => jest.resetModules())
 
-describe('hash', () => {
+describe('token', () => {
   it('getIssuer returns a token issuer middleware function', done => {
     jest.mock('jsonwebtoken', () => ({
       sign: () => 'test-token'
@@ -65,5 +65,27 @@ describe('hash', () => {
     const testToken = token.createToken({}, 'test-secret')
 
     expect(testToken).toBe('test-token') // from the mock at the top of the file
+  })
+
+  it('getTokenDecoder invokes the express-jwt middleware function', () => {
+    // TODO: I'm not thrilled with this test. What is it _really_ testing?
+    expect.assertions(5)
+
+    jest.mock('express-jwt', () => {
+      return ({ secret }) => {
+        expect(typeof secret).toBe('function')
+
+        return (req, res, next) => {
+          expect(req).toBe('req')
+          expect(res).toBe('res')
+          expect(next).toBe('next')
+        }
+      }
+    })
+
+    const tokenDecoder = require('../../server/token').getTokenDecoder()
+    expect(typeof tokenDecoder).toBe('function')
+
+    tokenDecoder('req', 'res', 'next')
   })
 })

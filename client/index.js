@@ -30,7 +30,8 @@ function signIn (user, options) {
 }
 
 function getAuthorizationHeader () {
+  const token = getEncodedToken()
   return {
-    "Authorization": `Bearer ${getEncodedToken()}`
+    "Authorization": token ? `Bearer ${token}` : null
   }
 }

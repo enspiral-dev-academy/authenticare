@@ -6,6 +6,11 @@ You can find an example fullstack application in the `example` folder.
 
 You can find the docs for the most important functions exported for both client-side and server-side use in the `docs` folder.
 
+## Version `0.4.4`
+
+* Added `server/token/getTokenDecoder` to replace `server/token/decode` to allow a route to succeed regardless if a token is provided or not. Currently `decode` will throw if a token is not found. `decode` is deprecated and will be removed in v0.5.0.
+* Updated dependencies to fix known security vulnerabilities
+
 ## Version `0.4.3`
 
 * Updated dependencies to fix known security vulnerabilities
