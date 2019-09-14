@@ -1,4 +1,4 @@
-const token = require('../server/token')
+const token = require('../../server/token')
 const testSecret = require('./testSecret')
 
 module.exports = function (subject) {
