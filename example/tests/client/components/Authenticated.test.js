@@ -1,7 +1,7 @@
 import React from 'react'
-import { toBeInTheDocument } from 'jest-dom'
-import { render, cleanup } from 'react-testing-library'
 import authenticare from 'authenticare/client'
+import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render, cleanup } from '@testing-library/react'
 
 import {
   IfAuthenticated,

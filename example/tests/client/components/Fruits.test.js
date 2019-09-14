@@ -1,6 +1,7 @@
 import React from 'react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
+
 import authenticare from 'authenticare/client'
-import { render, fireEvent, cleanup } from 'react-testing-library'
 
 import {
   // addFruit,
@@ -11,6 +12,7 @@ import {
 import Fruits from '../../../client/components/Fruits'
 
 require('babel-polyfill')
+
 jest.mock('authenticare/client')
 jest.mock('../../../client/api')
 

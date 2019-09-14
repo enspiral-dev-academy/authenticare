@@ -2,9 +2,10 @@ require('babel-polyfill')
 const request = require('supertest')
 
 const server = require('../../server/server')
-const db = require('../../server/db/db') // the mock
+const authTesting = require('authenticare/testing/server')
 
 jest.mock('../../server/db/db')
+const db = require('../../server/db/db') // the mock
 
 beforeEach(() => {
   db.reset()
@@ -19,6 +20,7 @@ test('GET / returns all the fruits', () => {
 })
 
 test('POST / adds a new fruit', () => {
+  authTesting.allowTokens(true) // the default
   return request(server)
     .post('/api/v1/fruits')
     .send({ name: 'durian', calories: 26 })

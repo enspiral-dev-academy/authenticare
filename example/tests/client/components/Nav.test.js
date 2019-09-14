@@ -1,7 +1,7 @@
 import React from 'react'
 import authenticare from 'authenticare/client'
 import { MemoryRouter } from 'react-router-dom'
-import { render, fireEvent, cleanup } from 'react-testing-library'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import Nav from '../../../client/components/Nav'
 

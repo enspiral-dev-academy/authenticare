@@ -1,5 +1,6 @@
 const express = require('express')
-const { decodeToken } = require('authenticare/server')
+
+const { getTokenDecoder } = require('authenticare/server')
 
 const db = require('../db/db')
 
