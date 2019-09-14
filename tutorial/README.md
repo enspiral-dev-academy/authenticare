@@ -128,7 +128,7 @@ At the moment, we are able to add, update and delete fruit when we are signed in
 
 The `server/routes/fruits.js` file contains the fruit-related routes. To determine if a request is authenticated or not, we attempt to decode the token sent in the `Authorization` request header. This is often done as a piece of Express middleware.
 
-The `authenticare/server` package exports a `getTokenDecoder` function that returns an Express middleware function that we can use our routes. For the fruit routes, you just need to replace the fake `decodeToken` function with the one from `authenticare`. [Check out the docs](https://github.com/don-smith/authenticare/blob/master/docs/server/getTokenDecoder.md) to see an example. Each of the `PUT`, `POST` and `DELETE` routes already have the `decodeToken` function in place. So now you can try to add, update or delete some fruit from the UI and you should see errors in the developer tools console.
+The `authenticare/server` package exports a `getTokenDecoder` function that returns an Express middleware function that we can use our routes. For the fruit routes, you just need to replace the fake `decodeToken` function with the one from `authenticare`. [Check out the docs](https://github.com/don-smith/authenticare/blob/master/docs/server/getTokenDecoder.md) to see an example. Each of the `PUT`, `POST` and `DELETE` routes already have the `getTokenDecoder` function in place. So now you can try to add, update or delete some fruit from the UI and you should see errors in the developer tools console.
 
 Now is a good time to commit your changes and swap driver/navigator.
 
