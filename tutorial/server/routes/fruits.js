@@ -1,7 +1,7 @@
 const express = require('express')
 
-// TODO: implement or import a proper decodeToken function
-const decodeToken = (req, res, next) => { next() }
+// TODO: implement or import a proper getTokenDecoder function
+const getTokenDecoder = (req, res, next) => { next() }
 
 const db = require('../db/db')
 
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 })
 
 // POST /api/v1/fruits
-router.post('/', decodeToken, async (req, res) => {
+router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
   try {
     const fruits = await db.addFruit(newFruit)
@@ -31,7 +31,7 @@ router.post('/', decodeToken, async (req, res) => {
 })
 
 // PUT /api/v1/fruits
-router.put('/', decodeToken, async (req, res) => {
+router.put('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
   try {
     const fruits = await db.updateFruit(newFruit)
@@ -42,7 +42,7 @@ router.put('/', decodeToken, async (req, res) => {
 })
 
 // DELETE /api/v1/fruits
-router.delete('/:id', decodeToken, async (req, res) => {
+router.delete('/:id', getTokenDecoder(), async (req, res) => {
   const id = Number(req.params.id)
   try {
     const fruits = await db.deleteFruit(id)
