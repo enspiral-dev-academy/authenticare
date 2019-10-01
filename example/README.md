@@ -1,18 +1,18 @@
 # Authenticare Example
 
-This folder contains a fullstack app that uses React on the frontend and Node on the backend that uses Authenticare to perform user registration and sign in.
+This folder contains a fullstack app that uses React on the frontend and Node on the backend that uses Authenticare to perform user registration and sign in. Jest is used for testing.
 
 ## Getting Started
 
 ```
 git clone https://github.com/don-smith/authenticare
 cd authenticare/example
-cp .env.example .env # to enable environment variables
-npm install          # to install dependencies
-npm run dev          # to start the dev server
+cp .env.example .env    # enable environment variables
+npm install             # install dependencies and setup database
+npm run dev             # start the dev server
 ```
 
-You can find the server running on [http://localhost:3000](http://localhost:3000).
+You can find the server running on [http://localhost:3333](http://localhost:3333).
 
 
 ## Implementation steps

@@ -21,8 +21,9 @@ router.get('/', async (req, res) => {
 // POST /api/v1/fruits
 router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
+  const user = req.user
   try {
-    const fruits = await db.addFruit(newFruit)
+    const fruits = await db.addFruit(newFruit, user)
     res.json({ fruits })
   } catch (err) {
     res.status(500).send(err.message)
@@ -32,10 +33,16 @@ router.post('/', getTokenDecoder(), async (req, res) => {
 // PUT /api/v1/fruits
 router.put('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
+  const user = req.user
   try {
-    const fruits = await db.updateFruit(newFruit)
+    const fruits = await db.updateFruit(newFruit, user)
     res.json({ fruits })
   } catch (err) {
+    if (err.message === 'Unauthorized') {
+      return res.status(403).send(
+        'Unauthorized: Only the user who added the fruit may update it'
+      )
+    }
     res.status(500).send(err.message)
   }
 })
@@ -43,10 +50,16 @@ router.put('/', getTokenDecoder(), async (req, res) => {
 // DELETE /api/v1/fruits
 router.delete('/:id', getTokenDecoder(), async (req, res) => {
   const id = Number(req.params.id)
+  const user = req.user
   try {
-    const fruits = await db.deleteFruit(id)
+    const fruits = await db.deleteFruit(id, user)
     res.json({ fruits })
   } catch (err) {
+    if (err.message === 'Unauthorized') {
+      return res.status(403).send(
+        'Unauthorized: Only the user who added the fruit may delete it'
+      )
+    }
     res.status(500).send(err.message)
   }
 })
