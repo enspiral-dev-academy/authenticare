@@ -18,7 +18,7 @@ jest.mock('../../client/auth', () => {
 const request = require('../../client/request')
 const { signInUrl } = require('../../endpoints')
 
-const rootUrl = 'https://domain.example/api/v1'
+const rootUrl = 'https://domain.example/auth'
 
 describe('the request function', () => {
   it('returns the token when successful', () => {
