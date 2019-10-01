@@ -21,10 +21,8 @@ This Express middleware function reads the `Authorization` header off of the HTT
 const { getTokenDecoder } = require('authenticare/server')
 const db = require('../db/db')
 
-const tokenDecoder = getTokenDecoder(false)
-
 // POST /api/v1/fruits
-router.post('/', tokenDecoder, async (req, res) => {
+router.post('/', getTokenDecoder(), async (req, res) => {
   const newFruit = req.body
 
   if (req.user) {

@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const request = require('supertest')
 
@@ -6,6 +8,7 @@ const endpoints = require('../../endpoints')
 const functions = {
   getUserByName: () => Promise.resolve({
     id: 1,
+    other: 'value',
     hash: 'test-hash',
     username: 'test-user'
   }),
@@ -38,6 +41,20 @@ describe('applyAuthRoutes', () => {
       .then(res => {
         expect(res.body.message).toMatch('successful')
         expect(res.body.token.length).toBe(168)
+
+        let response = {}
+        const verifyJwt = require('express-jwt')
+        verifyJwt({ secret: process.env.JWT_SECRET })(
+          {
+            headers: [ { Authorization: `Bearer ${res.body.token}` } ]
+          },
+          response,
+          (err) => {
+            console.error(err)
+            expect(res.user.id).toBe(2)
+            expect(res.user.other).toBe('value')
+            expect(res.user.username).toBe('test-user')
+          })
       })
   })
 

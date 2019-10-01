@@ -43,12 +43,9 @@ function decode (req, res, next) {
 }
 
 function createToken (user, secret) {
-  return jwt.sign({
-    id: user.id,
-    username: user.username
-  }, secret, {
-    expiresIn: '1d'
-  })
+  const token = { ...user }
+  delete token.hash
+  return jwt.sign(token, secret, { expiresIn: '1d' })
 }
 
 function getSecret (req, payload, done) {
