@@ -23,7 +23,8 @@ test('addFruit adds a fruit', () => {
     name: 'papaya',
     calories: 26
   }
-  return db.addFruit(fruit, testDb)
+  const user = { id: 5 }
+  return db.addFruit(fruit, user, testDb)
     .then(fruits => {
       expect(fruits.length).toBe(4)
     })
@@ -35,14 +36,16 @@ test('updateFruit updates a fruit', () => {
     name: 'papaya',
     calories: 26
   }
-  return db.updateFruit(fruit, testDb)
+  const user = { id: 1 }
+  return db.updateFruit(fruit, user, testDb)
     .then(fruits => {
       expect(fruits[2].name).toBe(fruit.name)
     })
 })
 
 test('deleteFruit deletes a fruit', () => {
-  return db.deleteFruit(2, testDb)
+  const user = { id: 2 }
+  return db.deleteFruit(2, user, testDb)
     .then(fruits => {
       expect(fruits.length).toBe(2)
     })
