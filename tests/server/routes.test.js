@@ -40,20 +40,21 @@ describe('applyAuthRoutes', () => {
       })
       .then(res => {
         expect(res.body.message).toMatch('successful')
-        expect(res.body.token.length).toBe(168)
+        expect(res.body.token.length).toBe(189)
 
-        let response = {}
+        const request = {
+          headers: { authorization: `Bearer ${res.body.token}` }
+        }
+        const response = {}
         const verifyJwt = require('express-jwt')
         verifyJwt({ secret: process.env.JWT_SECRET })(
-          {
-            headers: [ { Authorization: `Bearer ${res.body.token}` } ]
-          },
+          request,
           response,
           (err) => {
-            console.error(err)
-            expect(res.user.id).toBe(2)
-            expect(res.user.other).toBe('value')
-            expect(res.user.username).toBe('test-user')
+            if (err) console.error(err)
+            expect(request.user.id).toBe(1)
+            expect(request.user.other).toBe('value')
+            expect(request.user.username).toBe('test-user')
           })
       })
   })
@@ -82,7 +83,7 @@ describe('applyAuthRoutes', () => {
       })
       .then(res => {
         expect(res.body.message).toMatch('successful')
-        expect(res.body.token.length).toBe(168)
+        expect(res.body.token.length).toBe(189)
       })
   })
 
