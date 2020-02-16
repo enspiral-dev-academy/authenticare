@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { IfAuthenticated } from './Authenticated'
-import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { GridForm, ColOne, ColTwo, Button, Error } from './Styled'
 
 import {
   getFruits,
@@ -11,6 +11,7 @@ import {
 } from '../api'
 
 export default function Fruits () {
+  const [error, setError] = useState('')
   const [fruits, setFruits] = useState([])
   const [adding, setAdding] = useState({})
   const [editing, setEditing] = useState({})
@@ -45,6 +46,10 @@ export default function Fruits () {
       .then(remoteFruits => {
         setFruits(remoteFruits)
         setEditing({})
+        setError('')
+      })
+      .catch(err => {
+        setError(err.message)
       })
   }
 
@@ -53,6 +58,10 @@ export default function Fruits () {
       .then(remoteFruits => {
         setFruits(remoteFruits)
         setEditing({})
+        setError('')
+      })
+      .catch(err => {
+        setError(err.message)
       })
   }
 
@@ -63,6 +72,10 @@ export default function Fruits () {
         setFruits(remoteFruits)
         setAdding({})
       })
+  }
+
+  const hideError = () => {
+    setError('')
   }
 
   useEffect(() => {
@@ -77,6 +90,9 @@ export default function Fruits () {
 
   return (
     <React.Fragment>
+      <Error onClick={hideError}>
+        { error && `Error: ${error}` }
+      </Error>
       <ul>
         {fruits.map(fruit => (
           <li key={fruit.id}>

@@ -19,3 +19,8 @@ export const Button = styled.button`
   grid-column: 2;
   width: 50%;
 `
+
+export const Error = styled.div`
+  color: red;
+  cursor: pointer;
+`
