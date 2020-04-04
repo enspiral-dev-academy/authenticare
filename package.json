@@ -35,7 +35,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "libsodium-wrappers-sumo": "^0.7.5",
-    "superagent": "^5.1.0"
+    "superagent": "^5.2.2"
   },
   "devDependencies": {
     "jest": "^25.1.0",
