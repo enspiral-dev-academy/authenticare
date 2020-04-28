@@ -12,7 +12,7 @@ Adds two routes to the router supplied.
 
 - `router`: instance of `require('express').Router()`
 - `options`: object with the following properties
-    - `userExists`: function that accepts nothing and returns a Promise that resolves to a boolean
+    - `userExists`: function that accepts a username as a string and returns a Promise that resolves to a boolean
     - `createUser`: function that accepts a `user` object and returns a Promise with an insignificant resolution - the `user` object passed to this function is the same object you pass to `authenticare/client/register` and it must have a `username` property
     - `getUserByName`: function that accepts a username as a string and returns a Promise that resolves to an object - the object must have a `hash` property. All of the properties on this user object _except the `hash` property_ will be added to the token. So it's **important** you only add the properties you need in the token - as few as possible.
 
