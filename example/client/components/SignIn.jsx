@@ -3,24 +3,23 @@ import { signIn, isAuthenticated } from 'authenticare/client'
 
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
-export default function SignIn (props) {
+function SignIn (props) {
   const [form, setForm] = useState({
     username: '',
     password: ''
   })
 
   const handleChange = e => {
+    const {name, value} = e.target
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
   const handleClick = () => {
-    signIn({
-      username: form.username,
-      password: form.password
-    }, {
+    const {username, password} = form
+    signIn({ username, password }, {
       baseUrl: process.env.BASE_API_URL // see .env and webpack.config.js
     })
       .then((token) => {
@@ -31,7 +30,7 @@ export default function SignIn (props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <h2>Sign in</h2>
       <GridForm>
         <ColOne>Username:</ColOne>
@@ -46,6 +45,8 @@ export default function SignIn (props) {
 
         <Button type='button' onClick={handleClick}>Sign in</Button>
       </GridForm>
-    </React.Fragment>
+    </>
   )
 }
+
+export default SignIn

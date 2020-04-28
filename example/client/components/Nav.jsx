@@ -15,7 +15,7 @@ const NavLink = styled(Link)`
 
 export default function Nav () {
   return (
-    <React.Fragment>
+    <>
       <NavGroup>
         <NavLink to='/'>Home</NavLink>
         <IfAuthenticated>
@@ -28,6 +28,6 @@ export default function Nav () {
         </IfNotAuthenticated>
       </NavGroup>
       <h1>Fruit FTW!</h1>
-    </React.Fragment>
+    </>
   )
 }

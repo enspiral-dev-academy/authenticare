@@ -10,23 +10,25 @@ import {
   deleteFruit
 } from '../api'
 
-export default function Fruits () {
+function Fruits () {
   const [error, setError] = useState('')
   const [fruits, setFruits] = useState([])
   const [adding, setAdding] = useState({})
   const [editing, setEditing] = useState({})
 
   const handleEditChange = e => {
+    const {name, value} = e.target
     setEditing({
       ...editing,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
   const handleAddChange = e => {
+    const {name, value} = e.target
     setAdding({
       ...adding,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
@@ -89,7 +91,7 @@ export default function Fruits () {
   const { name: editingName, calories: editingCalories } = editing
 
   return (
-    <React.Fragment>
+    <>
       <Error onClick={hideError}>
         { error && `Error: ${error}` }
       </Error>
@@ -148,6 +150,8 @@ export default function Fruits () {
           <Button type='button' onClick={handleAdd}>Add fruit</Button>
         </GridForm>
       </IfAuthenticated>
-    </React.Fragment>
+    </>
   )
 }
+
+export default Fruits

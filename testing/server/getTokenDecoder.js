@@ -5,19 +5,19 @@ function getTokenDecoder (
 ) {
   return (req, res, next) => {
     if (!tokenRequired) {
-      // console.log('token not required')
+      // token not required
       next()
       return
     }
 
     if(isAuthorized) {
-      // console.log('token is authorized')
+      // token is authorized
       req.user = tokenToUse
       next()
       return
     }
 
-    // console.log('token required and not authorized')
+    // token required and not authorized
     res.status(401).send('Unauthorized')
   }
 }

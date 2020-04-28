@@ -146,7 +146,7 @@ Now is a good time to commit your changes and swap driver/navigator.
 
 ## 8. Client-side: Allow the user to log off
 
-Logging off in this application is as simple as removing the `token` field from the localStorage. That's how `authenticare` determines if the current user has been authenticated. We can use the `logOut` function from `authenticare/client` to do this for us.
+Logging off in this application is as simple as removing the `token` field from the localStorage. That's how `authenticare` determines if the current user has been authenticated. We can use the `logOff` function from `authenticare/client` to do this for us.
 
 The event handler for logging off is currently in the `client/components/Nav.jsx` component. Replace the empty version of `logOff` with the one from `authenticare/client`. [Check out the docs](https://github.com/don-smith/authenticare/blob/master/docs/client/logOff.md) if you need to. Once you're done, you should be able to log off, sign in, and register using the UI and your.
 
