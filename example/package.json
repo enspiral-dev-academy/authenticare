@@ -14,7 +14,9 @@
     "db:seed": "npm run knex seed:run",
     "build": "webpack --config client/webpack.config.js",
     "postinstall": "run-s db:migrate db:seed",
-    "test": "jest --verbose tests/client/components tests/server"
+    "test": "jest --verbose tests/client/components tests/server",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "babel": {
     "presets": [
@@ -35,7 +37,8 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "knex": "^0.20.11",
-    "sqlite3": "^4.1.0"
+    "sqlite3": "^4.1.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -72,5 +75,6 @@
     "supertest": "^4.0.2",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8"
-  }
+  },
+  "snyk": true
 }
