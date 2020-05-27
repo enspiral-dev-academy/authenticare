@@ -14,7 +14,7 @@ function getIssuer (getUserByName) {
   return function (req, res) {
     getUserByName(req.body.username)
       .then(user => {
-        const token = createToken(user, process.env.JWT_SECRET)
+        const token = createToken(user, process.env.JWT_SECRET, process.env.JWT_EXPIRE_TIME)
         res.json({
           message: 'Authentication successful.',
           token
@@ -42,10 +42,10 @@ function decode (req, res, next) {
   })(req, res, next)
 }
 
-function createToken (user, secret) {
+function createToken (user, secret, expireTime) {
   const token = { ...user }
   delete token.hash
-  return jwt.sign(token, secret, { expiresIn: '1d' })
+  return jwt.sign(token, secret, { expiresIn: expireTime ? expireTime : '1d' })
 }
 
 function getSecret (req, payload, done) {

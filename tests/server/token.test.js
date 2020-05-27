@@ -35,6 +35,81 @@ describe('token', () => {
     token.getIssuer(getUserByName)(req, res)
   })
 
+  it('getIssuer returns a token with a defined expiration time', (done) => {
+    expect.assertions(1);
+    jest.mock('jsonwebtoken', () => ({
+      sign: (token, secret, expires) => {
+        return {
+          token,
+          secret,
+          expires,
+        };
+      },
+    }));
+
+    const jwtExpireTime = '5h';
+    process.env.JWT_EXPIRE_TIME = jwtExpireTime;
+    const token = require('../../server/token');
+    const res = {
+      json: ({ token }) => {
+        expect(token.expires.expiresIn).toBe(jwtExpireTime);
+        delete process.env.JWT_EXPIRE_TIME
+        done();
+      },
+    };
+
+    const getUserByName = () => {
+      return Promise.resolve();
+    };
+
+    token.getIssuer(getUserByName)({ body: {} }, res);
+  });
+
+  it('getIssuer returns a token with a default expiration time', (done) => {
+    expect.assertions(1);
+    jest.mock('jsonwebtoken', () => ({
+      sign: (token, secret, expires) => {
+        return {
+          token,
+          secret,
+          expires,
+        };
+      },
+    }));
+
+    const token = require('../../server/token');
+    const res = {
+      json: ({ token }) => {
+        expect(token.expires.expiresIn).toBe('1d');
+        done();
+      },
+    };
+
+    const getUserByName = () => {
+      return Promise.resolve({});
+    };
+
+    token.getIssuer(getUserByName)({ body: {} }, res);
+  });
+  
+  it('default expiration time is 1 day', () => {
+    jest.mock('jsonwebtoken', () => ({
+      sign: (token, secret, expires) => {
+        return {
+          token,
+          secret,
+          expires,
+        };
+      },
+    }));
+
+    const token = require('../../server/token');
+
+    const testToken = token.createToken({}, 'test-secret');
+
+    expect(testToken.expires.expiresIn).toBe('1d');
+  });
+
   it('decode invokes the express-jwt middleware function', () => {
     expect.assertions(4)
 
