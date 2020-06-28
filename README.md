@@ -6,6 +6,14 @@ You can find an example fullstack application in the `example` folder.
 
 You can find the docs for the most important functions exported for both client-side and server-side use in the `docs` folder.
 
+## Version `0.4.7`
+
+* Updated dependencies
+* Added the ability to configure token expiration (thank you @nisidazza)
+* Removed the tutorial (too much to maintain) the example should suffice
+* Example: moved `BASE_API_URL` environment variable into a config file
+* Example: refactored tests
+
 ## Version `0.4.6`
 
 * Bug fix related to `verifyEndpoint` (thank you @joshuavial)
