@@ -1,5 +1,0 @@
-node_modules
-bundle.*
-*.log
-*.sqlite3
-.env
