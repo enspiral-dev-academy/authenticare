@@ -1,13 +1,12 @@
 import React from 'react'
 import authenticare from 'authenticare/client'
 import { MemoryRouter } from 'react-router-dom'
-import { render, fireEvent, cleanup } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import user from '@testing-library/user-event'
 
-import Nav from '../../../client/components/Nav'
+import Nav from './Nav'
 
 jest.mock('authenticare/client')
-
-afterEach(cleanup)
 
 describe('Nav component', () => {
   it('logs off when log off link is clicked', () => {
@@ -15,13 +14,13 @@ describe('Nav component', () => {
     authenticare.logOff.mockImplementation(mockLogOff)
     authenticare.isAuthenticated.mockImplementation(() => true)
 
-    const { getByTestId } = render(
+    render(
       <MemoryRouter>
         <Nav />
       </MemoryRouter>
     )
 
-    fireEvent.click(getByTestId('logoff'))
+    user.click(screen.getByRole('link', {name: /log off/i}))
 
     expect(mockLogOff).toBeCalled()
     expect(authenticare.isAuthenticated).toBeCalledTimes(2)

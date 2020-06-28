@@ -4,8 +4,8 @@ import { getAuthorizationHeader } from 'authenticare/client'
 const rootUrl = '/api/v1/fruits'
 const acceptJsonHeader = { 'Accept': 'application/json' }
 
-export function getFruits (url = rootUrl) {
-  return request.get(url)
+export function getFruits () {
+  return request.get(rootUrl)
     .set(acceptJsonHeader)
     .then(res => {
       return res.body.fruits
@@ -13,8 +13,8 @@ export function getFruits (url = rootUrl) {
     .catch(logError)
 }
 
-export function addFruit (fruit, url = rootUrl) {
-  return request.post(url)
+export function addFruit (fruit) {
+  return request.post(rootUrl)
     .set(acceptJsonHeader)
     .set(getAuthorizationHeader())
     .send(fruit)
@@ -22,8 +22,8 @@ export function addFruit (fruit, url = rootUrl) {
     .catch(logError)
 }
 
-export function updateFruit (fruit, url = rootUrl) {
-  return request.put(url)
+export function updateFruit (fruit) {
+  return request.put(rootUrl)
     .set(acceptJsonHeader)
     .set(getAuthorizationHeader())
     .send(fruit)
@@ -31,8 +31,8 @@ export function updateFruit (fruit, url = rootUrl) {
     .catch(logError)
 }
 
-export function deleteFruit (id, url = rootUrl) {
-  return request.delete(`${url}/${id}`)
+export function deleteFruit (id) {
+  return request.delete(`${rootUrl}/${id}`)
     .set(acceptJsonHeader)
     .set(getAuthorizationHeader())
     .then(res => res.body.fruits)

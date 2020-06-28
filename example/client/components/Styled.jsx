@@ -7,7 +7,7 @@ export const GridForm = styled.form`
   grid-template-columns: auto 1fr;
 `
 
-export const ColOne = styled.span`
+export const ColOne = styled.label`
   grid-column: 1;
 `
 

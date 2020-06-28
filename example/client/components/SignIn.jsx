@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { signIn, isAuthenticated } from 'authenticare/client'
 
+import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
 function SignIn (props) {
@@ -19,9 +20,7 @@ function SignIn (props) {
 
   const handleClick = () => {
     const {username, password} = form
-    signIn({ username, password }, {
-      baseUrl: process.env.BASE_API_URL // see .env and webpack.config.js
-    })
+    signIn({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
@@ -33,13 +32,17 @@ function SignIn (props) {
     <>
       <h2>Sign in</h2>
       <GridForm>
-        <ColOne>Username:</ColOne>
-        <ColTwo name='username'
+        <ColOne htmlFor='username'>Username:</ColOne>
+        <ColTwo type='text'
+          id='username' 
+          name='username'
           value={form.username}
           onChange={handleChange} />
 
-        <ColOne>Password:</ColOne>
-        <ColTwo name='password' type='password'
+        <ColOne htmlFor='password'>Password:</ColOne>
+        <ColTwo type='password'
+          id='password' 
+          name='password' 
           value={form.password}
           onChange={handleChange} />
 

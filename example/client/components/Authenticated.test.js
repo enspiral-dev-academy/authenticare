@@ -1,42 +1,38 @@
 import React from 'react'
+import '@testing-library/jest-dom'
 import authenticare from 'authenticare/client'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
-import { render, cleanup } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 import {
   IfAuthenticated,
   IfNotAuthenticated
-} from '../../../client/components/Authenticated'
-
-expect.extend({ toBeInTheDocument })
+} from './Authenticated'
 
 jest.mock('authenticare/client')
-
-afterEach(cleanup)
 
 describe('IfAuthenticated component', () => {
   it('displays children when authenticated', () => {
     authenticare.isAuthenticated.mockImplementation(() => true)
 
-    const { getByTestId } = render((
+    render((
       <IfAuthenticated>
         <div data-testid="test">test</div>
       </IfAuthenticated>
     ))
 
-    expect(getByTestId('test')).toBeInTheDocument()
+    expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
   it('returns null when not authenticated', () => {
     authenticare.isAuthenticated.mockImplementation(() => false)
 
-    const { queryByTestId } = render((
+    render((
       <IfAuthenticated>
         <div data-testid="test">test</div>
       </IfAuthenticated>
     ))
 
-    expect(queryByTestId('test')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('test')).not.toBeInTheDocument()
   })
 })
 
@@ -44,24 +40,24 @@ describe('IfNotAuthenticated component', () => {
   it('displays children when not authenticated', () => {
     authenticare.isAuthenticated.mockImplementation(() => false)
 
-    const { getByTestId } = render((
+    render((
       <IfNotAuthenticated>
         <div data-testid='test'>test</div>
       </IfNotAuthenticated>
     ))
 
-    expect(getByTestId('test')).toBeInTheDocument()
+    expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
   it('returns null when authenticated', () => {
     authenticare.isAuthenticated.mockImplementation(() => true)
 
-    const { queryByTestId } = render((
+    render((
       <IfNotAuthenticated>
         <div data-testid='test'>test</div>
       </IfNotAuthenticated>
     ))
 
-    expect(queryByTestId('test')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('test')).not.toBeInTheDocument()
   })
 })

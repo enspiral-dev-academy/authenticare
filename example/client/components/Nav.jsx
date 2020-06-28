@@ -5,7 +5,7 @@ import { logOff } from 'authenticare/client'
 
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
-const NavGroup = styled.div`
+const NavGroup = styled.nav`
   float: right;
 `
 
@@ -19,12 +19,11 @@ export default function Nav () {
       <NavGroup>
         <NavLink to='/'>Home</NavLink>
         <IfAuthenticated>
-          <NavLink to='#' data-testid='logoff'
-            onClick={logOff}>Log off</NavLink>
+          <NavLink to='#' onClick={logOff}>Log off</NavLink>
         </IfAuthenticated>
         <IfNotAuthenticated>
-          <NavLink to='/register' data-testid='register'>Register</NavLink>
-          <NavLink to='/signin' data-testid='signin'>Sign in</NavLink>
+          <NavLink to='/register'>Register</NavLink>
+          <NavLink to='/signin'>Sign in</NavLink>
         </IfNotAuthenticated>
       </NavGroup>
       <h1>Fruit FTW!</h1>

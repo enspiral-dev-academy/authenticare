@@ -2,7 +2,7 @@ const express = require('express')
 
 const { getTokenDecoder } = require('authenticare/server')
 
-const db = require('../db/db')
+const db = require('../db/fruits')
 
 const router = express.Router()
 

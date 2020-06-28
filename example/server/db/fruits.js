@@ -57,7 +57,6 @@ async function deleteFruit (id, user, db = connection) {
 }
 
 function authorizeUpdate (fruit, user) {
-  console.log('fruit and user', fruit, user)
   if (fruit.added_by_user !== user.id) {
     throw new Error('Unauthorized')
   }

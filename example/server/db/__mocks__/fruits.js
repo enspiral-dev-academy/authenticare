@@ -1,8 +1,3 @@
-/* Until we swap out /server/db.js with a data access module that hits a real
- * database, this file is almost identical to /server/db.js. The main difference are
- * exported functions that give us control over the data that we can use from our tests.
- */
-
 module.exports = {
   reset,
   clear,
@@ -16,15 +11,18 @@ const defaultFruits = [
   {
     id: 1,
     name: 'Banana',
-    calories: 105
+    calories: 105,
+    added_by_user: 1
   }, {
     id: 2,
     name: 'Apple',
-    calories: 95
+    calories: 95,
+    added_by_user: 2
   }, {
     id: 3,
     name: 'Feijoa',
-    calories: 26
+    calories: 26,
+    added_by_user: 1
   }
 ]
 

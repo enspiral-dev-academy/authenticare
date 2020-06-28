@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { register, isAuthenticated } from 'authenticare/client'
 
+import { baseApiUrl as baseUrl } from '../config'
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
 function Register (props) {
@@ -19,9 +20,7 @@ function Register (props) {
 
   const handleClick = () => {
     const {username, password} = form
-    register({ username, password }, {
-      baseUrl: process.env.BASE_API_URL // see .env and webpack.config.js
-    })
+    register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
@@ -33,13 +32,17 @@ function Register (props) {
     <>
       <h2>Register</h2>
       <GridForm>
-        <ColOne>Username:</ColOne>
-        <ColTwo name='username'
+        <ColOne htmlFor='username'>Username:</ColOne>
+        <ColTwo type='text'
+          id='username'
+          name='username'
           value={form.username}
           onChange={handleChange} />
 
-        <ColOne>Password:</ColOne>
-        <ColTwo name='password' type='password'
+        <ColOne htmlFor='password'>Password:</ColOne>
+        <ColTwo type='password'
+          id='password' 
+          name='password'
           value={form.password}
           onChange={handleChange} />
 

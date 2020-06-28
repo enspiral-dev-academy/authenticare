@@ -57,23 +57,17 @@ function Fruits () {
 
   const handleDelete = () => {
     deleteFruit(editing.id)
-      .then(remoteFruits => {
-        setFruits(remoteFruits)
-        setEditing({})
-        setError('')
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+      .then(setFruits)
+      .then(() => setEditing({}))
+      .then(() => setError(''))
+      .catch(err => setError(err.message))
   }
 
   const handleAdd = () => {
     const newFruit = { ...adding }
     addFruit(newFruit)
-      .then(remoteFruits => {
-        setFruits(remoteFruits)
-        setAdding({})
-      })
+      .then(setFruits)
+      .then(() => setAdding({}))
   }
 
   const hideError = () => {
@@ -110,13 +104,17 @@ function Fruits () {
       <h2>Selected</h2>
       <GridForm>
         <ColOne>Name:</ColOne>
-        <ColTwo name='name'
+        <ColTwo type='text'
+          name='name'
+          aria-label='selected-name'
           data-testid='selected-name'
           value={editingName || ''}
           onChange={handleEditChange} />
 
         <ColOne>Calories:</ColOne>
-        <ColTwo name='calories'
+        <ColTwo type='text'
+          name='calories'
+          aria-label='selected-calories'
           data-testid='selected-calories'
           value={editingCalories || ''}
           onChange={handleEditChange} />
@@ -138,12 +136,16 @@ function Fruits () {
         <h2>Add new</h2>
         <GridForm>
           <ColOne>Name:</ColOne>
-          <ColTwo name='name'
+          <ColTwo type='text'
+            name='name'
+            aria-label='adding-name'
             value={addingName || ''}
             onChange={handleAddChange} />
 
           <ColOne>Calories:</ColOne>
-          <ColTwo name='calories'
+          <ColTwo type='text'
+            name='calories'
+            aria-label='adding-calories'
             value={addingCalories || ''}
             onChange={handleAddChange} />
 
