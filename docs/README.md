@@ -2,10 +2,6 @@
 
 Authenticare assumes a very specific web application architecture. The [example](/example) in this repo is a reference of that architecture. Basically, a Single Page Application (SPA) with a robust frontend (probably using React, Vue, Angular, etc) communicating with a REST Web API whose routes require authenticated users, assumably with different roles. The frontend uses JWTs to authenticate with the API. Authenticare abstracts away as much of the authentication mechanics as possible for common tasks (user registration, user sign in, reset password, etc).
 
-Right now the easiest way to understand how to use Authenticare is to use the [authenticare tutorial](https://github.com/don-smith/authenticare-tutorial). It walks through each of the steps needed to apply it to your application on both the client and server.
-
-However, if you'd rather jump into the deep end without as much guidance, here are the basic steps and links to the specific docs and the example app.
-
 ## Basic implementation steps
 
 ### 1. Client-side: Determine if the current user is signed in
