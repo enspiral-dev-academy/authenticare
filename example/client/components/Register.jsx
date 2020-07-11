@@ -33,14 +33,14 @@ function Register (props) {
       <h2>Register</h2>
       <GridForm>
         <ColOne htmlFor='username'>Username:</ColOne>
-        <ColTwo type='text'
+        <ColTwo type='text' required
           id='username'
           name='username'
           value={form.username}
           onChange={handleChange} />
 
         <ColOne htmlFor='password'>Password:</ColOne>
-        <ColTwo type='password'
+        <ColTwo type='password' required
           id='password'
           name='password'
           value={form.password}
