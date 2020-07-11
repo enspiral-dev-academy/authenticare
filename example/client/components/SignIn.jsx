@@ -41,10 +41,11 @@ function SignIn (props) {
 
         <ColOne htmlFor='password'>Password:</ColOne>
         <ColTwo type='password'
-          id='password' 
+          id='password'
           name='password' 
           value={form.password}
-          onChange={handleChange} />
+          onChange={handleChange}
+          autocomplete='current-password' />
 
         <Button type='button' onClick={handleClick}>Sign in</Button>
       </GridForm>
