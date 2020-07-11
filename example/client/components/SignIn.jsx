@@ -33,14 +33,14 @@ function SignIn (props) {
       <h2>Sign in</h2>
       <GridForm>
         <ColOne htmlFor='username'>Username:</ColOne>
-        <ColTwo type='text'
-          id='username' 
+        <ColTwo type='text' required
+          id='username'
           name='username'
           value={form.username}
           onChange={handleChange} />
 
         <ColOne htmlFor='password'>Password:</ColOne>
-        <ColTwo type='password'
+        <ColTwo type='password' required
           id='password'
           name='password' 
           value={form.password}
