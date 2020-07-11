@@ -41,10 +41,11 @@ function Register (props) {
 
         <ColOne htmlFor='password'>Password:</ColOne>
         <ColTwo type='password'
-          id='password' 
+          id='password'
           name='password'
           value={form.password}
-          onChange={handleChange} />
+          onChange={handleChange}
+          autocomplete='new-password' />
 
         <Button type='button' onClick={handleClick}>Register</Button>
       </GridForm>
