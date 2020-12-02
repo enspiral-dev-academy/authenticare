@@ -60,7 +60,7 @@ describe('the request function', () => {
   })
 
   it('requires a data object', () => {
-    expect.assertions(1) // in case the catch isn't reached
+    expect.assertions(2) // in case the catch isn't reached
     const scope = nock(rootUrl)
       .post(signInUrl)
       .reply(500)
@@ -70,37 +70,24 @@ describe('the request function', () => {
       .then(() => { /* should not get here */ })
       .catch(err => {
         expect(err.message).toMatch('data parameter is required')
-        scope.done()
+        expect(scope.isDone()).toBe(false)
       })
   })
 
   it('requires the data parameter have a username property', () => {
-    expect.assertions(1) // in case the catch isn't reached
+    expect.assertions(2) // in case the catch isn't reached
     const scope = nock(rootUrl)
       .post(signInUrl)
       .reply(500)
 
     // Intentionally passing an empty object as the 2nd parameter
     return request(rootUrl + signInUrl, {})
-      .then(() => { /* should not get here */ })
+      .then((res) => {
+        console.log(res)
+      /* should not get here */ })
       .catch(err => {
         expect(err.message).toMatch('must have a username property')
-        scope.done()
-      })
-  })
-
-  it('requires the data parameter have a username property', () => {
-    expect.assertions(1) // in case the catch isn't reached
-    const scope = nock(rootUrl)
-      .post(signInUrl)
-      .reply(500)
-
-    // Intentionally passing an empty object as the 2nd parameter
-    return request(rootUrl + signInUrl, {})
-      .then(() => { /* should not get here */ })
-      .catch(err => {
-        expect(err.message).toMatch('must have a username property')
-        scope.done()
+        expect(scope.isDone()).toBe(false)
       })
   })
 })

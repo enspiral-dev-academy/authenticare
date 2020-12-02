@@ -91,7 +91,7 @@ describe('token', () => {
 
     token.getIssuer(getUserByName)({ body: {} }, res)
   })
-  
+
   it('default expiration time is 1 day', () => {
     jest.mock('jsonwebtoken', () => ({
       sign: (token, secret, expires) => {
@@ -111,8 +111,10 @@ describe('token', () => {
   })
 
   it('decode invokes the express-jwt middleware function', () => {
-    expect.assertions(4)
+    expect.assertions(5)
 
+    let spy = jest.spyOn(console, 'warn')
+    spy.mockImplementationOnce(() => {})
     jest.mock('express-jwt', () => {
       return ({ secret }) => {
         expect(typeof secret).toBe('function')
@@ -128,6 +130,7 @@ describe('token', () => {
     const token = require('../../server/token')
 
     token.decode('req', 'res', 'next')
+    expect(spy.mock.calls[0][1]).toContain('deprecated')
   })
 
   it('createToken returns a signed token', () => {

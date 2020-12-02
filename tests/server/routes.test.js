@@ -136,10 +136,11 @@ describe('applyAuthRoutes', () => {
       const server = express()
       server.use(express.json())
       const router = express.Router()
-      server.use('/', router)
 
       functions.getUserByName = () => Promise.resolve(null)
       applyAuthRoutes(router, functions)
+
+      server.use('/', router)
 
       return request(server)
         .post(endpoints.signInUrl)
