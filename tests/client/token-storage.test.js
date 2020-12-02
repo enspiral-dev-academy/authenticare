@@ -1,7 +1,8 @@
 const {
   getToken,
   saveToken,
-  localStorageKeyName } = require('../../client/token-storage')
+  localStorageKeyName
+} = require('../../client/token-storage')
 
 describe('saveToken', () => {
   it('saves the token to localStorage', () => {

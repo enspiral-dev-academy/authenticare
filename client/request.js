@@ -29,7 +29,7 @@ module.exports = function (endpoint, data) {
 function verifyEndpoint (endpoint) {
   let matchFound = false
 
-  for (let ep of Object.values(endpoints)) {
+  for (const ep of Object.values(endpoints)) {
     matchFound = matchFound || endpoint.includes(ep)
   }
 

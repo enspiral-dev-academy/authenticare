@@ -40,7 +40,7 @@ describe('applyAuthRoutes', () => {
       })
       .then(res => {
         expect(res.body.message).toMatch('successful')
-        expect(res.body.token.length).toBe(189)
+        expect(res.body.token).toHaveLength(189)
 
         const request = {
           headers: { authorization: `Bearer ${res.body.token}` }
@@ -56,6 +56,7 @@ describe('applyAuthRoutes', () => {
             expect(request.user.other).toBe('value')
             expect(request.user.username).toBe('test-user')
           })
+        return null
       })
   })
 
@@ -83,7 +84,8 @@ describe('applyAuthRoutes', () => {
       })
       .then(res => {
         expect(res.body.message).toMatch('successful')
-        expect(res.body.token.length).toBe(189)
+        expect(res.body.token).toHaveLength(189)
+        return null
       })
   })
 
@@ -105,6 +107,7 @@ describe('applyAuthRoutes', () => {
         .send({})
         .then(res => {
           expect(res.body.errorType).toMatch('USERNAME_UNAVAILABLE')
+          return null
         })
     })
 
@@ -125,6 +128,7 @@ describe('applyAuthRoutes', () => {
         .send({})
         .then(res => {
           expect(res.body.errorType).toMatch('DATABASE_ERROR')
+          return null
         })
     })
   })
@@ -148,6 +152,7 @@ describe('applyAuthRoutes', () => {
         .send({})
         .then(res => {
           expect(res.body.errorType).toMatch('INVALID_CREDENTIALS')
+          return null
         })
     })
 
@@ -172,6 +177,7 @@ describe('applyAuthRoutes', () => {
         .send({})
         .then(res => {
           expect(res.body.errorType).toMatch('INVALID_CREDENTIALS')
+          return null
         })
     })
   })

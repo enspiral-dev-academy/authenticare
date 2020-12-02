@@ -18,11 +18,10 @@ module.exports = {
   getTokenDecoder: isTokenRequired => getTokenDecoder(isTokenRequired, getIsAuthorized(), getTokenToUse())
 }
 
-function getIsAuthorized() {
+function getIsAuthorized () {
   return isAuthorized
 }
 
-function getTokenToUse() {
+function getTokenToUse () {
   return tokenToUse
 }
-

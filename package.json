@@ -4,6 +4,7 @@
   "description": "A JWT helper library for full-stack Node apps",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --ext .js .",
     "test": "jest"
   },
   "repository": {
@@ -28,8 +29,16 @@
     ]
   },
   "homepage": "https://github.com/don-smith/authenticare#readme",
+  "eslintConfig": {
+    "extends": "eda",
+    "ignorePatterns": [
+      "example"
+    ]
+  },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "eslint": "^7.14.0",
+    "eslint-config-eda": "^0.1.4",
     "express": "^4.17.1",
     "express-jwt": "^5.3.3",
     "jsonwebtoken": "^8.5.1",

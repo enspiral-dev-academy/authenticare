@@ -9,6 +9,7 @@ describe('hash.generate', () => {
     return hash.generate('test-password')
       .then(actual => {
         expect(actual).toMatch(expected)
+        return null
       })
   })
 })
@@ -20,6 +21,7 @@ describe('hash.verify', () => {
     return hash.verify(passwordHash, password)
       .then(result => {
         expect(result).toBeTruthy()
+        return null
       })
   })
 
@@ -29,6 +31,7 @@ describe('hash.verify', () => {
     return hash.verify(passwordHash, password)
       .then(result => {
         expect(result).toBeFalsy()
+        return null
       })
   })
 
@@ -38,6 +41,7 @@ describe('hash.verify', () => {
     return hash.verify(passwordHash, password)
       .then(result => {
         expect(result).toBeFalsy()
+        return null
       })
   })
 })

@@ -10,7 +10,7 @@ function getTokenDecoder (
       return
     }
 
-    if(isAuthorized) {
+    if (isAuthorized) {
       // token is authorized
       req.user = tokenToUse
       next()

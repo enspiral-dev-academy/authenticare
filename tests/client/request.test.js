@@ -36,6 +36,7 @@ describe('the request function', () => {
         expect(res.token).toBe(successfulTokenResponse.token)
         expect(res.message).toBe(successfulTokenResponse.message)
         scope.done()
+        return null
       })
   })
 
@@ -56,6 +57,7 @@ describe('the request function', () => {
       .then(res => {
         expect(scope.isDone()).toBeTruthy()
         scope.done()
+        return null
       })
   })
 
@@ -67,10 +69,11 @@ describe('the request function', () => {
 
     // Intentionally not passing the 2nd parameter to request()
     return request(rootUrl + signInUrl)
-      .then(() => { /* should not get here */ })
+      .then(() => { return null /* should not get here */ })
       .catch(err => {
         expect(err.message).toMatch('data parameter is required')
         expect(scope.isDone()).toBe(false)
+        return null
       })
   })
 
@@ -82,12 +85,11 @@ describe('the request function', () => {
 
     // Intentionally passing an empty object as the 2nd parameter
     return request(rootUrl + signInUrl, {})
-      .then((res) => {
-        console.log(res)
-      /* should not get here */ })
+      .then((res) => { return null /* should not get here */ })
       .catch(err => {
         expect(err.message).toMatch('must have a username property')
         expect(scope.isDone()).toBe(false)
+        return null
       })
   })
 })
