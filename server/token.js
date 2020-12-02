@@ -11,6 +11,7 @@ module.exports = {
 }
 
 function getIssuer (getUserByName) {
+  if (!process.env.JWT_SECRET) throw "Authenticare needs a JWT_SECRET environment variable.  Add it to your .env file or wherever you keep your environment variables. \n"
   return function (req, res) {
     getUserByName(req.body.username)
       .then(user => {
