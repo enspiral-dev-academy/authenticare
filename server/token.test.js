@@ -6,7 +6,7 @@ describe('token', () => {
       sign: () => 'test-token'
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     expect.assertions(3)
 
@@ -49,7 +49,7 @@ describe('token', () => {
 
     const jwtExpireTime = '5h'
     process.env.JWT_EXPIRE_TIME = jwtExpireTime
-    const token = require('../../server/token')
+    const token = require('./token')
     const res = {
       json: ({ token }) => {
         expect(token.expires.expiresIn).toBe(jwtExpireTime)
@@ -77,7 +77,7 @@ describe('token', () => {
       },
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
     const res = {
       json: ({ token }) => {
         expect(token.expires.expiresIn).toBe('1d')
@@ -91,7 +91,7 @@ describe('token', () => {
 
     token.getIssuer(getUserByName)({ body: {} }, res)
   })
-  
+
   it('default expiration time is 1 day', () => {
     jest.mock('jsonwebtoken', () => ({
       sign: (token, secret, expires) => {
@@ -103,7 +103,7 @@ describe('token', () => {
       },
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     const testToken = token.createToken({}, 'test-secret')
 
@@ -125,7 +125,7 @@ describe('token', () => {
       }
     })
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     token.decode('req', 'res', 'next')
   })
@@ -135,7 +135,7 @@ describe('token', () => {
       sign: () => 'test-token'
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     const testToken = token.createToken({}, 'test-secret')
 
@@ -158,7 +158,7 @@ describe('token', () => {
       }
     })
 
-    const tokenDecoder = require('../../server/token').getTokenDecoder()
+    const tokenDecoder = require('./token').getTokenDecoder()
     expect(typeof tokenDecoder).toBe('function')
 
     tokenDecoder('req', 'res', 'next')
