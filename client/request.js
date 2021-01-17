@@ -1,9 +1,8 @@
-const request = require('superagent')
-
-const { saveAuthToken } = require('./auth')
+const consume = require('./consume')
 const endpoints = require('../endpoints')
+const { saveAuthToken } = require('./auth')
 
-module.exports = function (endpoint, data) {
+module.exports = function (endpoint, data, request = consume) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json'
@@ -17,33 +16,29 @@ module.exports = function (endpoint, data) {
       reject(err)
     }
 
-    request.post(endpoint)
-      .set(headers)
-      .send(data)
-      .then(res => resolve(saveAuthToken(res.body.token)))
-      .catch(err => reject(err))
+    request(endpoint, headers, data)
+      .then((res) => resolve(saveAuthToken(res.body?.token)))
+      .catch((err) => {
+        const errMessage = err.response?.body?.error?.title
+        reject(new Error(errMessage || err.message))
+      })
   })
 }
 
 // Ensures the endpoint matches one of the known endpoints
 function verifyEndpoint (endpoint) {
-  let matchFound = false
-
-  for (let ep of Object.values(endpoints)) {
-    matchFound = matchFound || endpoint.includes(ep)
-  }
-
-  if (!matchFound) {
-    throw new Error('endpoint does not match any of the known endpoints')
+  const foundMatch = Object.values(endpoints).includes(endpoint)
+  if (!foundMatch) {
+    throw new Error('Endpoint does not match any of the known endpoints')
   }
 }
 
 function verifyData (data) {
   if (!data) {
-    throw new Error('data parameter is required')
+    throw new Error('Data parameter is required')
   }
 
   if (!data.username) {
-    throw new Error('data parameter must have a username property')
+    throw new Error('Data parameter must have a username property')
   }
 }

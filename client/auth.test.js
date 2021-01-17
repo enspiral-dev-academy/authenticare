@@ -2,7 +2,7 @@ beforeEach(() => jest.resetModules())
 
 describe('isAuthenticated', () => {
   it('returns true if token has not expired', () => {
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => 'test-token'
     }))
 
@@ -14,13 +14,13 @@ describe('isAuthenticated', () => {
       }
     })
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     const result = auth.isAuthenticated()
     expect(result).toBeTruthy()
   })
 
   it('returns false if token has expired', () => {
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => 'test-token',
       saveToken: () => {}
     }))
@@ -34,14 +34,14 @@ describe('isAuthenticated', () => {
       }
     })
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     const result = auth.isAuthenticated()
     expect(result).toBeFalsy()
   })
 
   it('logs off the user if token has expired', () => {
     expect.assertions(2) // in case saveToken is never called
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => 'test-token',
       saveToken: token => {
         expect(token).toBeNull()
@@ -57,16 +57,16 @@ describe('isAuthenticated', () => {
       }
     })
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     auth.isAuthenticated()
   })
 
   it('returns false if no token is present', () => {
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => {} // no token returned
     }))
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     const result = auth.isAuthenticated()
     expect(result).toBeFalsy()
   })
@@ -75,7 +75,7 @@ describe('isAuthenticated', () => {
 describe('saveAuthToken', () => {
   it('saves the token and returns a decoded token', () => {
     const testToken = 'test-token'
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       saveToken: token => {
         expect(token).toBe('test-token')
       }
@@ -88,14 +88,14 @@ describe('saveAuthToken', () => {
       }
     })
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     expect(auth.saveAuthToken(testToken).sub).toBe('token-test')
   })
 })
 
 describe('getDecodedToken', () => {
   it('returns a decoded token when token is present', () => {
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => 'test-token'
     }))
 
@@ -106,27 +106,27 @@ describe('getDecodedToken', () => {
       }
     })
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     expect(auth.getDecodedToken().sub).toBe('token-test')
   })
 
   it('returns null if no token is present', () => {
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => {} // no token returned
     }))
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     expect(auth.getDecodedToken()).toBeNull()
   })
 })
 
 describe('getEncodedToken', () => {
   it('returns the encoded token', () => {
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       getToken: () => 'test-token'
     }))
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     expect(auth.getEncodedToken()).toBe('test-token')
   })
 })
@@ -134,13 +134,13 @@ describe('getEncodedToken', () => {
 describe('logOff', () => {
   it('attempts to save a null token', () => {
     expect.assertions(1)
-    jest.doMock('../../client/token-storage', () => ({
+    jest.doMock('./token-storage', () => ({
       saveToken: token => {
         expect(token).toBeNull()
       }
     }))
 
-    const auth = require('../../client/auth')
+    const auth = require('./auth')
     auth.logOff()
   })
 })

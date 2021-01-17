@@ -1,4 +1,4 @@
-const hash = require('../../server/hash')
+const hash = require('./hash')
 
 beforeEach(() => jest.resetModules())
 

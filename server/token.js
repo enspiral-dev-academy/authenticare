@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const verifyJwt = require('express-jwt')
 
-const testSecret = require('../testing/server/testSecret')
+const testSecret = 'this-is-a-test-secret'
 
 module.exports = {
   decode,
