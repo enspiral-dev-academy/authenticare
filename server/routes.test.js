@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const request = require('supertest')
 
-const endpoints = require('../../endpoints')
+const endpoints = require('../endpoints')
 
 const functions = {
   getUserByName: () => Promise.resolve({
@@ -22,7 +22,7 @@ describe('applyAuthRoutes', () => {
   beforeEach(() => jest.resetModules())
 
   it('creates an operational /auth/register route', () => {
-    const { applyAuthRoutes } = require('../../server/routes')
+    const { applyAuthRoutes } = require('./routes')
 
     const server = express()
     server.use(express.json())
@@ -47,7 +47,7 @@ describe('applyAuthRoutes', () => {
         }
         const response = {}
         const verifyJwt = require('express-jwt')
-        verifyJwt({ secret: process.env.JWT_SECRET })(
+        verifyJwt({ secret: process.env.JWT_SECRET, algorithms: ['HS256'] })(
           request,
           response,
           (err) => {
@@ -60,12 +60,12 @@ describe('applyAuthRoutes', () => {
   })
 
   it('creates an operational /auth/signin route', () => {
-    jest.mock('../../server/hash', () => {
+    jest.mock('./hash', () => {
       return {
         verify: () => Promise.resolve(true)
       }
     })
-    const { applyAuthRoutes } = require('../../server/routes')
+    const { applyAuthRoutes } = require('./routes')
 
     const server = express()
     server.use(express.json())
@@ -89,7 +89,7 @@ describe('applyAuthRoutes', () => {
 
   describe('/auth/register', () => {
     it('returns status 400 if the username is already being used', () => {
-      const { applyAuthRoutes } = require('../../server/routes')
+      const { applyAuthRoutes } = require('./routes')
 
       const server = express()
       server.use(express.json())
@@ -109,7 +109,7 @@ describe('applyAuthRoutes', () => {
     })
 
     it('returns status 500 if there is a database error', () => {
-      const { applyAuthRoutes } = require('../../server/routes')
+      const { applyAuthRoutes } = require('./routes')
 
       const server = express()
       server.use(express.json())
@@ -131,7 +131,7 @@ describe('applyAuthRoutes', () => {
 
   describe('/auth/signin', () => {
     it('returns a status 400 if no user is returned from the database', () => {
-      const { applyAuthRoutes } = require('../../server/routes')
+      const { applyAuthRoutes } = require('./routes')
 
       const server = express()
       server.use(express.json())
@@ -151,12 +151,12 @@ describe('applyAuthRoutes', () => {
     })
 
     it('returns a status 400 if the password and hash do not match', () => {
-      jest.mock('../../server/hash', () => {
+      jest.mock('./hash', () => {
         return {
           verify: () => Promise.resolve(false)
         }
       })
-      const { applyAuthRoutes } = require('../../server/routes')
+      const { applyAuthRoutes } = require('./routes')
 
       const server = express()
       server.use(express.json())
