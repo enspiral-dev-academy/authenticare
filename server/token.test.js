@@ -113,7 +113,7 @@ describe('token', () => {
   })
 
   it('decode invokes the express-jwt middleware function', () => {
-    expect.assertions(4)
+    expect.assertions(5)
 
     jest.mock('express-jwt', () => {
       return ({ secret }) => {
@@ -126,10 +126,13 @@ describe('token', () => {
         }
       }
     })
+    jest.spyOn(console, 'warn').mockImplementation(() => {})
 
     const token = require('./token')
 
     token.decode('req', 'res', 'next')
+    expect(console.warn).toHaveBeenCalled()
+    console.warn.mockRestore()
   })
 
   it('createToken returns a signed token', () => {
