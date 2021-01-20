@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/don-smith/authenticare.git"
+    "url": "git+https://github.com/enspiral-dev-academy/authenticare.git"
   },
   "keywords": [
     "auth",
     "jwt",
     "nodejs"
   ],
-  "author": "Don Smith <don@antiantonym.com>",
+  "author": "Enspiral Dev Academy <hello@devacademy.co.nz>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/don-smith/authenticare/issues"
+    "url": "https://github.com/enspiral-dev-academy/authenticare/issues"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -27,7 +27,7 @@
       "tutorial"
     ]
   },
-  "homepage": "https://github.com/don-smith/authenticare#readme",
+  "homepage": "https://github.com/enspiral-dev-academy/authenticare#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
