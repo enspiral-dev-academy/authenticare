@@ -46,7 +46,7 @@ describe('the request function', () => {
     }))
 
     function mockConsume (endpoint, headers) {
-      expect(headers.Accept).toBe('application/json')
+      expect(headers['Accept']).toBe('application/json')
       expect(headers['Content-Type']).toBe('application/json')
       return Promise.resolve({ body: { token: mockToken } })
     }

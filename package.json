@@ -39,7 +39,7 @@
     "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.18.0",
+    "eslint": "^7.9.0",
     "eslint-config-eda": "^0.1.4",
     "jest": "^26.6.3",
     "supertest": "^6.1.1"
