@@ -11,7 +11,7 @@ function Register (props) {
   })
 
   const handleChange = e => {
-    const {name, value} = e.target
+    const { name, value } = e.target
     setForm({
       ...form,
       [name]: value
@@ -19,12 +19,13 @@ function Register (props) {
   }
 
   const handleClick = () => {
-    const {username, password} = form
-    register({ username, password }, { baseUrl })
+    const { username, password } = form
+    return register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
         }
+        return null
       })
   }
 
