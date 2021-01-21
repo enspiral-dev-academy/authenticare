@@ -11,7 +11,7 @@ function SignIn (props) {
   })
 
   const handleChange = e => {
-    const {name, value} = e.target
+    const { name, value } = e.target
     setForm({
       ...form,
       [name]: value
@@ -19,12 +19,13 @@ function SignIn (props) {
   }
 
   const handleClick = () => {
-    const {username, password} = form
-    signIn({ username, password }, { baseUrl })
+    const { username, password } = form
+    return signIn({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
         }
+        return null
       })
   }
 
@@ -42,7 +43,7 @@ function SignIn (props) {
         <ColOne htmlFor='password'>Password:</ColOne>
         <ColTwo type='password' required
           id='password'
-          name='password' 
+          name='password'
           value={form.password}
           onChange={handleChange}
           autocomplete='current-password' />

@@ -28,8 +28,8 @@ function applyAuthRoutes (router, functions) {
             errorType: USERNAME_UNAVAILABLE
           })
         }
-        functions.createUser(req.body)
-          .then(() => next())
+        // eslint-disable-next-line
+        return functions.createUser(req.body).then(() => next())
       })
       .catch(err => {
         res.status(500).send({
@@ -49,6 +49,7 @@ function applyAuthRoutes (router, functions) {
         return user && hash.verify(user.hash, req.body.password)
       })
       .then(isValid => {
+        // eslint-disable-next-line promise/no-callback-in-promise
         if (isValid) return next()
         throw new Error(INVALID_CREDENTIALS)
       })

@@ -20,9 +20,9 @@ describe('Nav component', () => {
       </MemoryRouter>
     )
 
-    user.click(screen.getByRole('link', {name: /log off/i}))
+    user.click(screen.getByRole('link', { name: /log off/i }))
 
-    expect(mockLogOff).toBeCalled()
-    expect(authenticare.isAuthenticated).toBeCalledTimes(2)
+    expect(mockLogOff).toHaveBeenCalled()
+    expect(authenticare.isAuthenticated).toHaveBeenCalledTimes(2)
   })
 })

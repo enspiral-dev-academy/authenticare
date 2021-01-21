@@ -15,7 +15,8 @@ afterEach(() => env.cleanup(testDb))
 test('getFruits returns all fruits', () => {
   return db.getFruits(testDb)
     .then(fruits => {
-      expect(fruits.length).toBe(3)
+      expect(fruits).toHaveLength(3)
+      return null
     })
 })
 
@@ -27,7 +28,8 @@ test('addFruit adds a fruit', () => {
   const user = { id: 5 }
   return db.addFruit(fruit, user, testDb)
     .then(fruits => {
-      expect(fruits.length).toBe(4)
+      expect(fruits).toHaveLength(4)
+      return null
     })
 })
 
@@ -41,6 +43,7 @@ test('updateFruit updates a fruit', () => {
   return db.updateFruit(fruit, user, testDb)
     .then(fruits => {
       expect(fruits[2].name).toBe(fruit.name)
+      return null
     })
 })
 
@@ -57,12 +60,12 @@ test('updateFruit fails if not originating user', () => {
     })
 })
 
-
 test('deleteFruit deletes a fruit', () => {
   const user = { id: 2 }
   return db.deleteFruit(2, user, testDb)
     .then(fruits => {
-      expect(fruits.length).toBe(2)
+      expect(fruits).toHaveLength(2)
+      return null
     })
 })
 

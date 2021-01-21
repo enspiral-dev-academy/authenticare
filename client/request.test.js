@@ -27,6 +27,7 @@ describe('the request function', () => {
       .then(res => {
         expect(res.token).toBe(mockToken)
         expect(res.message).toBe(mockMessage)
+        return null
       })
   })
 
@@ -45,7 +46,7 @@ describe('the request function', () => {
     }))
 
     function mockConsume (endpoint, headers) {
-      expect(headers['Accept']).toBe('application/json')
+      expect(headers.Accept).toBe('application/json')
       expect(headers['Content-Type']).toBe('application/json')
       return Promise.resolve({ body: { token: mockToken } })
     }
@@ -53,6 +54,7 @@ describe('the request function', () => {
     return request(signInUrl, user, mockConsume)
       .then(res => {
         expect(res).toBeTruthy()
+        return null
       })
   })
 
@@ -61,7 +63,7 @@ describe('the request function', () => {
 
     // Intentionally not passing the 2nd parameter to request()
     return request(signInUrl)
-      .then(() => { /* should not get here */ })
+      .then(() => { return null /* should not get here */ })
       .catch(err => {
         expect(err.message).toMatch('Data parameter is required')
       })
@@ -72,7 +74,7 @@ describe('the request function', () => {
 
     // Intentionally passing an empty object as the 2nd parameter
     return request(signInUrl, {})
-      .then(() => { /* should not get here */ })
+      .then(() => { return null /* should not get here */ })
       .catch(err => {
         expect(err.message).toMatch('must have a username property')
       })
