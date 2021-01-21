@@ -13,6 +13,7 @@ You can find the docs for the most important functions exported for both client-
 * Updated all others dependencies
 * Moved tests to same folder as code under test
 * Removed `testing` folder - I might bring it back later if I can get happy with it
+* Improved lint config and applied fixes throughout codebase (thanks @joshuavial)
 * Example: require username and password on sign-in and register forms
 
 
