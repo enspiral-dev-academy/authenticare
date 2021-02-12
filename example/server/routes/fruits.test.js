@@ -19,6 +19,7 @@ describe('GET /', () => {
       .get('/api/v1/fruits')
       .then(res => {
         expect(res.body.fruits).toHaveLength(3)
+        return null
       })
   })
 })
@@ -31,9 +32,10 @@ describe('POST /', () => {
           .post('/api/v1/fruits')
           .set('Authorization', `Bearer ${token}`)
           .send({ name: 'durian', calories: 26 })
-          .then(res => {
-            expect(res.body.fruits).toHaveLength(4)
-          })
+      })
+      .then(res => {
+        expect(res.body.fruits).toHaveLength(4)
+        return null
       })
   })
 })
@@ -48,9 +50,10 @@ describe('PUT /', () => {
           .put('/api/v1/fruits')
           .set('Authorization', `Bearer ${token}`)
           .send({ id: 3, name: newName, calories: 26 })
-          .then(res => {
-            expect(res.body.fruits[2].name).toBe(newName)
-          })
+      })
+      .then(res => {
+        expect(res.body.fruits[2].name).toBe(newName)
+        return null
       })
   })
 })
@@ -62,9 +65,10 @@ describe('DELETE /:id', () => {
         return request(server)
           .delete('/api/v1/fruits/1')
           .set('Authorization', `Bearer ${token}`)
-          .then(res => {
-            expect(res.body.fruits).toHaveLength(2)
-          })
+      })
+      .then(res => {
+        expect(res.body.fruits).toHaveLength(2)
+        return null
       })
   })
 })
@@ -72,6 +76,6 @@ describe('DELETE /:id', () => {
 function getTestToken (srv) {
   return request(srv)
     .post('/api/v1/auth/signin')
-    .send({username: 'jess', password: 'jess'})
+    .send({ username: 'jess', password: 'jess' })
     .then(res => res.body.token)
 }

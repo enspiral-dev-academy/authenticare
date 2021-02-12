@@ -5,7 +5,8 @@ const {
   isAuthenticated,
   getDecodedToken,
   getEncodedToken,
-  logOff } = require('./auth')
+  logOff
+} = require('./auth')
 
 module.exports = {
   signIn,
@@ -32,6 +33,6 @@ function signIn (user, options) {
 function getAuthorizationHeader () {
   const token = getEncodedToken()
   return {
-    "Authorization": token ? `Bearer ${token}` : null
+    Authorization: token ? `Bearer ${token}` : null
   }
 }

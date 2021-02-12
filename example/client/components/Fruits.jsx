@@ -17,7 +17,7 @@ function Fruits () {
   const [editing, setEditing] = useState({})
 
   const handleEditChange = e => {
-    const {name, value} = e.target
+    const { name, value } = e.target
     setEditing({
       ...editing,
       [name]: value
@@ -25,7 +25,7 @@ function Fruits () {
   }
 
   const handleAddChange = e => {
-    const {name, value} = e.target
+    const { name, value } = e.target
     setAdding({
       ...adding,
       [name]: value
@@ -49,6 +49,7 @@ function Fruits () {
         setFruits(remoteFruits)
         setEditing({})
         setError('')
+        return null
       })
       .catch(err => {
         setError(err.message)
@@ -68,6 +69,7 @@ function Fruits () {
     addFruit(newFruit)
       .then(setFruits)
       .then(() => setAdding({}))
+      .catch(err => setError(err.message))
   }
 
   const hideError = () => {
@@ -78,7 +80,9 @@ function Fruits () {
     getFruits()
       .then(remoteFruits => {
         setFruits(remoteFruits)
+        return null
       })
+      .catch(err => setError(err.message))
   }, [])
 
   const { name: addingName, calories: addingCalories } = adding

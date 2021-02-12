@@ -1,3 +1,5 @@
+/* eslint-disable jest/no-done-callback */
+
 beforeEach(() => jest.resetModules())
 
 describe('token', () => {
@@ -42,9 +44,9 @@ describe('token', () => {
         return {
           token,
           secret,
-          expires,
+          expires
         }
-      },
+      }
     }))
 
     const jwtExpireTime = '5h'
@@ -55,7 +57,7 @@ describe('token', () => {
         expect(token.expires.expiresIn).toBe(jwtExpireTime)
         delete process.env.JWT_EXPIRE_TIME
         done()
-      },
+      }
     }
 
     const getUserByName = () => {
@@ -72,9 +74,9 @@ describe('token', () => {
         return {
           token,
           secret,
-          expires,
+          expires
         }
-      },
+      }
     }))
 
     const token = require('./token')
@@ -82,7 +84,7 @@ describe('token', () => {
       json: ({ token }) => {
         expect(token.expires.expiresIn).toBe('1d')
         done()
-      },
+      }
     }
 
     const getUserByName = () => {
@@ -98,9 +100,9 @@ describe('token', () => {
         return {
           token,
           secret,
-          expires,
+          expires
         }
-      },
+      }
     }))
 
     const token = require('./token')
@@ -111,7 +113,7 @@ describe('token', () => {
   })
 
   it('decode invokes the express-jwt middleware function', () => {
-    expect.assertions(4)
+    expect.assertions(5)
 
     jest.mock('express-jwt', () => {
       return ({ secret }) => {
@@ -124,10 +126,13 @@ describe('token', () => {
         }
       }
     })
+    jest.spyOn(console, 'warn').mockImplementation(() => {})
 
     const token = require('./token')
 
     token.decode('req', 'res', 'next')
+    expect(console.warn).toHaveBeenCalled()
+    console.warn.mockRestore()
   })
 
   it('createToken returns a signed token', () => {
