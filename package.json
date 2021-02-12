@@ -22,6 +22,12 @@
   "bugs": {
     "url": "https://github.com/enspiral-dev-academy/authenticare/issues"
   },
+  "eslintConfig": {
+    "extends": "eda",
+    "ignorePatterns": [
+      "bundle.js"
+    ]
+  },
   "jest": {
     "testPathIgnorePatterns": [
       "node_modules",

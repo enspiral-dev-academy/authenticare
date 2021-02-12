@@ -1,8 +1,0 @@
-{
-  "extends": "eda",
-  "settings": {
-    "react": {
-      "version": "latest"
-    }
-  }
-}
