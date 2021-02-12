@@ -26,7 +26,12 @@
     "extends": "eda",
     "ignorePatterns": [
       "bundle.js"
-    ]
+    ],
+    "settings": {
+      "react": {
+        "version": "latest"
+      }
+    }
   },
   "jest": {
     "testPathIgnorePatterns": [
