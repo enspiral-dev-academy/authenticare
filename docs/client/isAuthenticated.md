@@ -26,13 +26,13 @@ import { isAuthenticated } from 'authenticare/client'
 
 export function IfAuthenticated ({ children }) {
   return isAuthenticated()
-    ? <React.Fragment>{ children }</React.Fragment>
+    ? <>{ children }</>
     : null
 }
 
 export function IfNotAuthenticated ({ children }) {
   return !isAuthenticated()
-    ? <React.Fragment>{ children }</React.Fragment>
+    ? <>{ children }</>
     : null
 }
 ```

@@ -33,14 +33,15 @@ export default function Register (props) {
     password: ''
   })
 
-  const handleChange = e => {
+  function handleChange (e) {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     })
   }
 
-  const handleClick = () => {
+  function handleSubmit (e) {
+    e.preventDefault()
     register({
       username: form.username,
       password: form.password
@@ -53,9 +54,9 @@ export default function Register (props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <h2>Register</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne>Username:</ColOne>
         <ColTwo name='username'
           value={form.username}
@@ -66,9 +67,9 @@ export default function Register (props) {
           value={form.password}
           onChange={handleChange} />
 
-        <Button type='button' onClick={handleClick}>Register</Button>
+        <Button>Register</Button>
       </GridForm>
-    </React.Fragment>
+    </>
   )
 }
 ```

@@ -1,1 +1,6 @@
 node_modules
+
+# Build output
+/client
+/server
+/endpoints.js

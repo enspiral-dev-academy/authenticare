@@ -10,7 +10,7 @@ function Register (props) {
     password: ''
   })
 
-  const handleChange = e => {
+  function handleChange (e) {
     const { name, value } = e.target
     setForm({
       ...form,
@@ -18,7 +18,8 @@ function Register (props) {
     })
   }
 
-  const handleClick = () => {
+  function handleSubmit (e) {
+    e.preventDefault()
     const { username, password } = form
     return register({ username, password }, { baseUrl })
       .then((token) => {
@@ -32,7 +33,7 @@ function Register (props) {
   return (
     <>
       <h2>Register</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne htmlFor='username'>Username:</ColOne>
         <ColTwo type='text' required
           id='username'
@@ -48,7 +49,7 @@ function Register (props) {
           onChange={handleChange}
           autocomplete='new-password' />
 
-        <Button type='button' onClick={handleClick}>Register</Button>
+        <Button>Register</Button>
       </GridForm>
     </>
   )

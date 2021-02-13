@@ -33,14 +33,15 @@ export default function SignIn (props) {
     password: ''
   })
 
-  const handleChange = e => {
+  function handleChange (e) {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     })
   }
 
-  const handleClick = () => {
+  function handleSubmit (e) {
+    e.preventDefault()
     signIn({
       username: form.username,
       password: form.password
@@ -53,9 +54,9 @@ export default function SignIn (props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <h2>Sign in</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne>Username:</ColOne>
         <ColTwo name='username'
           value={form.username}
@@ -66,9 +67,9 @@ export default function SignIn (props) {
           value={form.password}
           onChange={handleChange} />
 
-        <Button type='button' onClick={handleClick}>Sign in</Button>
+        <Button>Sign in</Button>
       </GridForm>
-    </React.Fragment>
+    </>
   )
 }
 ```

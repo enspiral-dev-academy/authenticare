@@ -1,8 +1,8 @@
-const consume = require('./consume')
-const endpoints = require('../endpoints')
-const { saveAuthToken } = require('./auth')
+import consume from './consume'
+import endpoints from '../endpoints'
+import { saveAuthToken } from './auth'
 
-module.exports = function (endpoint, data, request = consume) {
+export default function (endpoint, data, request = consume) {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json'
@@ -27,7 +27,9 @@ module.exports = function (endpoint, data, request = consume) {
 
 // Ensures the endpoint matches one of the known endpoints
 function verifyEndpoint (endpoint) {
-  const foundMatch = Object.values(endpoints).includes(endpoint)
+  const foundMatch = Object.values(endpoints).some(ep => {
+    return endpoint.includes(ep)
+  })
   if (!foundMatch) {
     throw new Error('Endpoint does not match any of the known endpoints')
   }

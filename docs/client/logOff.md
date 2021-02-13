@@ -26,7 +26,7 @@ import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 export default function Nav () {
   return (
-    <React.Fragment>
+    <>
       <div>
         <Link to='/'>Home</NavLink>
         <IfAuthenticated>
@@ -38,8 +38,7 @@ export default function Nav () {
         </IfNotAuthenticated>
       </div>
       <h1>Fruit FTW!</h1>
-    </React.Fragment>
+    </>
   )
 }
 ```
-

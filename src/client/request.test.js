@@ -1,6 +1,6 @@
-const auth = require('./auth')
-const request = require('./request')
-const { signInUrl } = require('../endpoints')
+import * as auth from './auth'
+import request from './request'
+import { signInUrl } from '../endpoints'
 
 jest.mock('./auth')
 

@@ -29,6 +29,7 @@ function getTokenDecoder (throwNoTokenError = true) {
   return (req, res, next) => {
     verifyJwt({
       secret: getSecret,
+      algorithms: ['HS256'],
       credentialsRequired: throwNoTokenError
     })(req, res, next)
   }
@@ -47,7 +48,9 @@ function decode (req, res, next) {
 function createToken (user, secret, expireTime) {
   const token = { ...user }
   delete token.hash
-  return jwt.sign(token, secret, { expiresIn: expireTime || '1d' })
+  return jwt.sign(token, secret, {
+    expiresIn: expireTime || '1d'
+  })
 }
 
 function getSecret (req, payload, done) {

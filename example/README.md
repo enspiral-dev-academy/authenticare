@@ -7,9 +7,9 @@ This folder contains a fullstack app that uses React on the frontend and Node on
 ```
 git clone https://github.com/don-smith/authenticare
 cd authenticare/example
-cp .env.example .env    # enable environment variables
-npm install             # install dependencies and setup database
-npm run dev             # start the dev server
+cp server/.env.example server/.env    # enable environment variables
+npm install                           # install dependencies and setup database
+npm run dev                           # start the dev server
 ```
 
 You can find the server running on [http://localhost:3333](http://localhost:3333).

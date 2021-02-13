@@ -1,13 +1,13 @@
-require('dotenv').config()
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '../.env') })
 require('core-js/stable')
-require('regenerator-runtime/runtime')
 const request = require('supertest')
 
 const server = require('../server')
+const db = require('../db/fruits') // the mock
 
 jest.mock('../db/users')
 jest.mock('../db/fruits')
-const db = require('../db/fruits') // the mock
 
 beforeEach(() => {
   db.reset()

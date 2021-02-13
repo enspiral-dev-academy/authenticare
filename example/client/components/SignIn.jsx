@@ -10,7 +10,7 @@ function SignIn (props) {
     password: ''
   })
 
-  const handleChange = e => {
+  function handleChange (e) {
     const { name, value } = e.target
     setForm({
       ...form,
@@ -18,7 +18,8 @@ function SignIn (props) {
     })
   }
 
-  const handleClick = () => {
+  function handleSubmit (e) {
+    e.preventDefault()
     const { username, password } = form
     return signIn({ username, password }, { baseUrl })
       .then((token) => {
@@ -32,7 +33,7 @@ function SignIn (props) {
   return (
     <>
       <h2>Sign in</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne htmlFor='username'>Username:</ColOne>
         <ColTwo type='text' required
           id='username'
@@ -48,7 +49,7 @@ function SignIn (props) {
           onChange={handleChange}
           autocomplete='current-password' />
 
-        <Button type='button' onClick={handleClick}>Sign in</Button>
+        <Button>Sign in</Button>
       </GridForm>
     </>
   )

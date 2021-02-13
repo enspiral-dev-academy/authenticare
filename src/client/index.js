@@ -1,21 +1,21 @@
-const request = require('./request')
-const { signInUrl, registerUrl } = require('../endpoints')
+import request from './request'
+import { signInUrl, registerUrl } from '../endpoints'
 
-const {
+import {
   isAuthenticated,
   getDecodedToken,
   getEncodedToken,
   logOff
-} = require('./auth')
+} from './auth'
 
 module.exports = {
-  signIn,
-  logOff,
-  register,
+  getAuthorizationHeader,
   isAuthenticated,
-  getEncodedToken,
   getDecodedToken,
-  getAuthorizationHeader
+  getEncodedToken,
+  register,
+  signIn,
+  logOff
 }
 
 function register (newUser, options) {
