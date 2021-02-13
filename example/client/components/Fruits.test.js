@@ -16,15 +16,14 @@ import Fruits from './Fruits'
 jest.mock('authenticare/client')
 jest.mock('../api')
 
-const fruitLink = 'fruit-link'
 const selectedName = 'selected-name'
 const selectedCalories = 'selected-calories'
 const addingName = 'adding-name'
 const addingCalories = 'adding-calories'
-const addFruitButton = {name: /add fruit/i}
-const updateFruitButton = {name: /update fruit/i}
-const deleteFruitButton = {name: /delete fruit/i}
-const clearSelectionButton = {name: /clear selection/i}
+const addFruitButton = { name: /add fruit/i }
+const updateFruitButton = { name: /update fruit/i }
+const deleteFruitButton = { name: /delete fruit/i }
+const clearSelectionButton = { name: /clear selection/i }
 
 const fruits = [
   {
@@ -67,6 +66,7 @@ describe('Fruits component', () => {
     return screen.findAllByRole('link')
       .then(links => {
         expect(links).toHaveLength(3)
+        return null
       })
   })
 
@@ -78,6 +78,7 @@ describe('Fruits component', () => {
         user.click(links[0])
         expect(screen.getByLabelText(selectedName)).toHaveValue('orange')
         expect(screen.getByLabelText(selectedCalories)).toHaveValue('11')
+        return null
       })
   })
 
@@ -93,6 +94,7 @@ describe('Fruits component', () => {
         user.click(screen.getByRole('button', clearSelectionButton))
         expect(screen.getByLabelText(selectedName)).toHaveValue('')
         expect(screen.getByLabelText(selectedCalories)).toHaveValue('')
+        return null
       })
   })
 
@@ -128,6 +130,7 @@ describe('Fruits component', () => {
       })
       .then(links => {
         expect(links[0]).toHaveTextContent(/^new test fruit$/)
+        return null
       })
   })
 
@@ -141,11 +144,12 @@ describe('Fruits component', () => {
         expect(links).toHaveLength(3)
         user.click(links[0])
         user.click(screen.getByRole('button', deleteFruitButton))
-        return waitForElementToBeRemoved(() => screen.getByRole('link', {name: 'orange'}))
+        return waitForElementToBeRemoved(() => screen.getByRole('link', { name: 'orange' }))
       })
       .then(() => screen.findAllByRole('link'))
       .then(links => {
         expect(links).toHaveLength(2)
+        return null
       })
   })
 
@@ -158,16 +162,18 @@ describe('Fruits component', () => {
       .then(links => {
         // make sure we're not starting out with a link to mango
         links.forEach(link => expect(link).not.toHaveTextContent(/mango/i))
+        return null
       })
       .then(() => {
         user.type(screen.getByLabelText(addingName), 'mango')
         user.type(screen.getByLabelText(addingCalories), '210')
         user.click(screen.getByRole('button', addFruitButton))
-        return screen.findByRole('link', {name: /mango/i})
+        return screen.findByRole('link', { name: /mango/i })
       })
       .then(link => {
         expect(link).toHaveTextContent('mango')
         expect(screen.getAllByRole('link')).toHaveLength(4)
+        return null
       })
   })
 })

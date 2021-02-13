@@ -1,21 +1,13 @@
-const decode = require('jwt-decode')
+import decode from './jwtDecode'
 
-const { saveToken, getToken } = require('./token-storage')
+import { saveToken, getToken } from './tokenStorage'
 
-module.exports = {
-  saveAuthToken,
-  isAuthenticated,
-  getDecodedToken,
-  getEncodedToken,
-  logOff
-}
-
-function saveAuthToken (authToken) {
+export function saveAuthToken (authToken) {
   saveToken(authToken)
   return decode(authToken)
 }
 
-function isAuthenticated () {
+export function isAuthenticated () {
   const authToken = getToken()
 
   if (authToken) {
@@ -32,15 +24,15 @@ function isAuthenticated () {
   }
 }
 
-function getDecodedToken () {
+export function getDecodedToken () {
   const authToken = getToken()
   return authToken ? decode(authToken) : null
 }
 
-function getEncodedToken () {
+export function getEncodedToken () {
   return getToken()
 }
 
-function logOff () {
+export function logOff () {
   saveToken(null)
 }

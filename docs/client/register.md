@@ -33,18 +33,18 @@ export default function Register (props) {
     password: ''
   })
 
-  const handleChange = e => {
+  function handleChange (e) {
+    const { name, value } = e.target
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
-  const handleClick = () => {
-    register({
-      username: form.username,
-      password: form.password
-    })
+  function handleSubmit (e) {
+    e.preventDefault()
+    const { username, password } = form
+    register({ username, password })
       .then(() => {
         if (isAuthenticated()) {
           props.history.push('/')
@@ -53,9 +53,9 @@ export default function Register (props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <h2>Register</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne>Username:</ColOne>
         <ColTwo name='username'
           value={form.username}
@@ -66,9 +66,9 @@ export default function Register (props) {
           value={form.password}
           onChange={handleChange} />
 
-        <Button type='button' onClick={handleClick}>Register</Button>
+        <Button>Register</Button>
       </GridForm>
-    </React.Fragment>
+    </>
   )
 }
 ```

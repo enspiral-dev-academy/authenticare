@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const verifyJwt = require('express-jwt')
 
-const testSecret = require('../testing/server/testSecret')
+const testSecret = 'this-is-a-test-secret'
 
 module.exports = {
   decode,
@@ -11,14 +11,16 @@ module.exports = {
 }
 
 function getIssuer (getUserByName) {
+  if (!process.env.JWT_SECRET) throw new Error('Authenticare needs a JWT_SECRET environment variable.  Add it to your .env file or wherever you keep your environment variables.')
   return function (req, res) {
-    getUserByName(req.body.username)
+    return getUserByName(req.body.username)
       .then(user => {
         const token = createToken(user, process.env.JWT_SECRET, process.env.JWT_EXPIRE_TIME)
         res.json({
           message: 'Authentication successful.',
           token
         })
+        return null
       })
   }
 }
@@ -27,6 +29,7 @@ function getTokenDecoder (throwNoTokenError = true) {
   return (req, res, next) => {
     verifyJwt({
       secret: getSecret,
+      algorithms: ['HS256'],
       credentialsRequired: throwNoTokenError
     })(req, res, next)
   }
@@ -45,7 +48,7 @@ function decode (req, res, next) {
 function createToken (user, secret, expireTime) {
   const token = { ...user }
   delete token.hash
-  return jwt.sign(token, secret, { expiresIn: expireTime ? expireTime : '1d' })
+  return jwt.sign(token, secret, { expiresIn: expireTime || '1d' })
 }
 
 function getSecret (req, payload, done) {

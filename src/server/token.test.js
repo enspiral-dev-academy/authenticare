@@ -1,3 +1,5 @@
+/* eslint-disable jest/no-done-callback */
+
 beforeEach(() => jest.resetModules())
 
 describe('token', () => {
@@ -6,7 +8,7 @@ describe('token', () => {
       sign: () => 'test-token'
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     expect.assertions(3)
 
@@ -42,20 +44,20 @@ describe('token', () => {
         return {
           token,
           secret,
-          expires,
+          expires
         }
-      },
+      }
     }))
 
     const jwtExpireTime = '5h'
     process.env.JWT_EXPIRE_TIME = jwtExpireTime
-    const token = require('../../server/token')
+    const token = require('./token')
     const res = {
       json: ({ token }) => {
         expect(token.expires.expiresIn).toBe(jwtExpireTime)
         delete process.env.JWT_EXPIRE_TIME
         done()
-      },
+      }
     }
 
     const getUserByName = () => {
@@ -72,17 +74,17 @@ describe('token', () => {
         return {
           token,
           secret,
-          expires,
+          expires
         }
-      },
+      }
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
     const res = {
       json: ({ token }) => {
         expect(token.expires.expiresIn).toBe('1d')
         done()
-      },
+      }
     }
 
     const getUserByName = () => {
@@ -91,19 +93,19 @@ describe('token', () => {
 
     token.getIssuer(getUserByName)({ body: {} }, res)
   })
-  
+
   it('default expiration time is 1 day', () => {
     jest.mock('jsonwebtoken', () => ({
       sign: (token, secret, expires) => {
         return {
           token,
           secret,
-          expires,
+          expires
         }
-      },
+      }
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     const testToken = token.createToken({}, 'test-secret')
 
@@ -111,7 +113,7 @@ describe('token', () => {
   })
 
   it('decode invokes the express-jwt middleware function', () => {
-    expect.assertions(4)
+    expect.assertions(5)
 
     jest.mock('express-jwt', () => {
       return ({ secret }) => {
@@ -124,10 +126,13 @@ describe('token', () => {
         }
       }
     })
+    jest.spyOn(console, 'warn').mockImplementation(() => {})
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     token.decode('req', 'res', 'next')
+    expect(console.warn).toHaveBeenCalled()
+    console.warn.mockRestore()
   })
 
   it('createToken returns a signed token', () => {
@@ -135,7 +140,7 @@ describe('token', () => {
       sign: () => 'test-token'
     }))
 
-    const token = require('../../server/token')
+    const token = require('./token')
 
     const testToken = token.createToken({}, 'test-secret')
 
@@ -158,7 +163,7 @@ describe('token', () => {
       }
     })
 
-    const tokenDecoder = require('../../server/token').getTokenDecoder()
+    const tokenDecoder = require('./token').getTokenDecoder()
     expect(typeof tokenDecoder).toBe('function')
 
     tokenDecoder('req', 'res', 'next')

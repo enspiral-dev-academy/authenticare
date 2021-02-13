@@ -29,7 +29,7 @@ const defaultFruits = [
 let fruits = defaultFruits
 
 function reset () {
-  fruits = [ ...defaultFruits ]
+  fruits = [...defaultFruits]
 }
 
 function clear () {

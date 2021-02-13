@@ -10,43 +10,46 @@ function SignIn (props) {
     password: ''
   })
 
-  const handleChange = e => {
-    const {name, value} = e.target
+  function handleChange (e) {
+    const { name, value } = e.target
     setForm({
       ...form,
       [name]: value
     })
   }
 
-  const handleClick = () => {
-    const {username, password} = form
-    signIn({ username, password }, { baseUrl })
+  function handleSubmit (e) {
+    e.preventDefault()
+    const { username, password } = form
+    return signIn({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
         }
+        return null
       })
   }
 
   return (
     <>
       <h2>Sign in</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne htmlFor='username'>Username:</ColOne>
-        <ColTwo type='text'
-          id='username' 
+        <ColTwo type='text' required
+          id='username'
           name='username'
           value={form.username}
           onChange={handleChange} />
 
         <ColOne htmlFor='password'>Password:</ColOne>
-        <ColTwo type='password'
-          id='password' 
-          name='password' 
+        <ColTwo type='password' required
+          id='password'
+          name='password'
           value={form.password}
-          onChange={handleChange} />
+          onChange={handleChange}
+          autocomplete='current-password' />
 
-        <Button type='button' onClick={handleClick}>Sign in</Button>
+        <Button>Sign in</Button>
       </GridForm>
     </>
   )

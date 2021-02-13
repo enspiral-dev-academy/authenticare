@@ -1,7 +1,8 @@
-const {
+import {
   getToken,
   saveToken,
-  localStorageKeyName } = require('../../client/token-storage')
+  localStorageKeyName
+} from './tokenStorage'
 
 describe('saveToken', () => {
   it('saves the token to localStorage', () => {

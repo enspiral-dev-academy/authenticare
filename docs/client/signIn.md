@@ -33,18 +33,18 @@ export default function SignIn (props) {
     password: ''
   })
 
-  const handleChange = e => {
+  function handleChange (e) {
+    const { name, value } = e.target
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
-  const handleClick = () => {
-    signIn({
-      username: form.username,
-      password: form.password
-    })
+  function handleSubmit (e) {
+    e.preventDefault()
+    const { username, password } = form
+    signIn({ username, password })
       .then(() => {
         if (isAuthenticated()) {
           props.history.push('/')
@@ -53,9 +53,9 @@ export default function SignIn (props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <h2>Sign in</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne>Username:</ColOne>
         <ColTwo name='username'
           value={form.username}
@@ -66,9 +66,9 @@ export default function SignIn (props) {
           value={form.password}
           onChange={handleChange} />
 
-        <Button type='button' onClick={handleClick}>Sign in</Button>
+        <Button>Sign in</Button>
       </GridForm>
-    </React.Fragment>
+    </>
   )
 }
 ```

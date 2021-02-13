@@ -2,7 +2,7 @@ import request from 'superagent'
 import { getAuthorizationHeader } from 'authenticare/client'
 
 const rootUrl = '/api/v1/fruits'
-const acceptJsonHeader = { 'Accept': 'application/json' }
+const acceptJsonHeader = { Accept: 'application/json' }
 
 export function getFruits () {
   return request.get(rootUrl)

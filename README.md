@@ -6,6 +6,19 @@ You can find an example fullstack application in the `example` folder.
 
 You can find the docs for the most important functions exported for both client-side and server-side use in the `docs` folder.
 
+## Version `0.4.8`
+
+* Replaced `libsodium-wrappers-sumo` with `libsodium`
+* Removed `nock` as a `devDependency`
+* Updated all possible dependencies
+* Moved tests to same folder as code under test
+* Running tests require NodeJS version 14 or greater (due to use of the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) `?`)
+* Removed `testing` folder - I might bring it back later if I can get happy with it
+* Improved lint config and applied fixes throughout codebase (thanks @joshuavial)
+* Example: require username and password on sign-in and register forms
+* A LOT of code refactorings (mostly aesthetics)
+
+
 ## Version `0.4.7`
 
 * Updated dependencies
@@ -14,10 +27,12 @@ You can find the docs for the most important functions exported for both client-
 * Example: moved `BASE_API_URL` environment variable into a config file
 * Example: refactored tests
 
+
 ## Version `0.4.6`
 
 * Bug fix related to `verifyEndpoint` (thank you @joshuavial)
 * Updated dependencies to fix known security vulnerabilities
+
 
 ## Version `0.4.5`
 

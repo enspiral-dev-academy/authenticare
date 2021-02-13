@@ -1,19 +1,20 @@
-const request = require('./request')
-const { signInUrl, registerUrl } = require('../endpoints')
+import request from './request'
+import { signInUrl, registerUrl } from '../endpoints'
 
-const {
+import {
   isAuthenticated,
   getDecodedToken,
   getEncodedToken,
-  logOff } = require('./auth')
+  logOff
+} from './auth'
 
 module.exports = {
   signIn,
   logOff,
   register,
   isAuthenticated,
-  getEncodedToken,
   getDecodedToken,
+  getEncodedToken,
   getAuthorizationHeader
 }
 
@@ -32,6 +33,6 @@ function signIn (user, options) {
 function getAuthorizationHeader () {
   const token = getEncodedToken()
   return {
-    "Authorization": token ? `Bearer ${token}` : null
+    Authorization: token ? `Bearer ${token}` : null
   }
 }

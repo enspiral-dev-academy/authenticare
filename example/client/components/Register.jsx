@@ -10,43 +10,46 @@ function Register (props) {
     password: ''
   })
 
-  const handleChange = e => {
-    const {name, value} = e.target
+  function handleChange (e) {
+    const { name, value } = e.target
     setForm({
       ...form,
       [name]: value
     })
   }
 
-  const handleClick = () => {
-    const {username, password} = form
-    register({ username, password }, { baseUrl })
+  function handleSubmit (e) {
+    e.preventDefault()
+    const { username, password } = form
+    return register({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
           props.history.push('/')
         }
+        return null
       })
   }
 
   return (
     <>
       <h2>Register</h2>
-      <GridForm>
+      <GridForm onSubmit={handleSubmit}>
         <ColOne htmlFor='username'>Username:</ColOne>
-        <ColTwo type='text'
+        <ColTwo type='text' required
           id='username'
           name='username'
           value={form.username}
           onChange={handleChange} />
 
         <ColOne htmlFor='password'>Password:</ColOne>
-        <ColTwo type='password'
-          id='password' 
+        <ColTwo type='password' required
+          id='password'
           name='password'
           value={form.password}
-          onChange={handleChange} />
+          onChange={handleChange}
+          autocomplete='new-password' />
 
-        <Button type='button' onClick={handleClick}>Register</Button>
+        <Button>Register</Button>
       </GridForm>
     </>
   )

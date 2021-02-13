@@ -1,45 +1,66 @@
 {
   "name": "authenticare",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "A JWT helper library for full-stack Node apps",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "build": "babel src -d .",
+    "lint": "eslint --ext=.js,.jsx src",
+    "lint:fix": "eslint --ext=.js,.jsx --fix src",
+    "test": "JWT_SECRET='this is a secret' jest --verbose src"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/don-smith/authenticare.git"
+    "url": "git+https://github.com/enspiral-dev-academy/authenticare.git"
   },
   "keywords": [
     "auth",
     "jwt",
     "nodejs"
   ],
-  "author": "Don Smith <don@antiantonym.com>",
+  "author": "Enspiral Dev Academy <hello@devacademy.co.nz>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/don-smith/authenticare/issues"
+    "url": "https://github.com/enspiral-dev-academy/authenticare/issues"
+  },
+  "eslintConfig": {
+    "extends": "eda",
+    "ignorePatterns": [
+      "bundle.js"
+    ],
+    "settings": {
+      "react": {
+        "version": "latest"
+      }
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "node_modules",
-      "example",
-      "tutorial"
+      "example"
     ]
   },
-  "homepage": "https://github.com/don-smith/authenticare#readme",
+  "homepage": "https://github.com/enspiral-dev-academy/authenticare#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^2.2.0",
-    "libsodium-wrappers-sumo": "^0.7.6",
-    "superagent": "^5.3.1"
+    "jwt-decode": "^3.1.2",
+    "libsodium-wrappers": "^0.7.9",
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
-    "jest": "^26.1.0",
-    "nock": "^13.0.2",
-    "supertest": "^4.0.2"
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "eslint": "^7.9.0",
+    "eslint-config-eda": "^0.1.4",
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
   }
 }
