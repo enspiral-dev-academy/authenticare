@@ -34,18 +34,17 @@ export default function SignIn (props) {
   })
 
   function handleChange (e) {
+    const { name, value } = e.target
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
   function handleSubmit (e) {
     e.preventDefault()
-    signIn({
-      username: form.username,
-      password: form.password
-    })
+    const { username, password } = form
+    signIn({ username, password })
       .then(() => {
         if (isAuthenticated()) {
           props.history.push('/')

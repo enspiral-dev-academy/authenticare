@@ -34,18 +34,17 @@ export default function Register (props) {
   })
 
   function handleChange (e) {
+    const { name, value } = e.target
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
   function handleSubmit (e) {
     e.preventDefault()
-    register({
-      username: form.username,
-      password: form.password
-    })
+    const { username, password } = form
+    register({ username, password })
       .then(() => {
         if (isAuthenticated()) {
           props.history.push('/')
