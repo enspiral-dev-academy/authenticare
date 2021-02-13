@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d .",
-    "lint": "eslint --ext=.js,.jsx src/client src/server",
-    "lint:fix": "eslint --ext=.js,.jsx --fix src/client src/server",
+    "lint": "eslint --ext=.js,.jsx src",
+    "lint:fix": "eslint --ext=.js,.jsx --fix src",
     "test": "JWT_SECRET='this is a secret' jest --verbose src"
   },
   "repository": {

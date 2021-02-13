@@ -9,13 +9,13 @@ import {
 } from './auth'
 
 module.exports = {
-  getAuthorizationHeader,
+  signIn,
+  logOff,
+  register,
   isAuthenticated,
   getDecodedToken,
   getEncodedToken,
-  register,
-  signIn,
-  logOff
+  getAuthorizationHeader
 }
 
 function register (newUser, options) {

@@ -22,13 +22,13 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      "babel-plugin-styled-components",
-      "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-transform-runtime"
+      "@babel/plugin-transform-runtime",
+      "babel-plugin-styled-components"
     ]
   },
   "dependencies": {
+    "authenticare": "0.4.8",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.21.17",
@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
-    "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.13",
     "@babel/plugin-transform-runtime": "^7.12.15",
     "@babel/preset-env": "^7.12.16",
