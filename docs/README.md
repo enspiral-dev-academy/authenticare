@@ -31,7 +31,7 @@ Authenticare assumes a very specific web application architecture. The [example]
 
   - [Docs](https://github.com/enspiral-dev-academy/authenticare/blob/main/docs/server/generateHash.md)
   - [Example](https://github.com/enspiral-dev-academy/authenticare/blob/main/example/server/db/users.js)
-  - [Example](https://github/com/enspiral-dev-academy/authenticare/blob/main/example/server/db/seeds/users.js)
+  - [Example](https://github.com/enspiral-dev-academy/authenticare/blob/main/example/server/db/seeds/users.js)
 
 ### 5. Client-side: Allow the user to sign in
 
