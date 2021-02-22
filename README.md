@@ -6,6 +6,13 @@ You can find an example fullstack application in the `example` folder.
 
 You can find the docs for the most important functions exported for both client-side and server-side use in the `docs` folder.
 
+## Version `0.4.9`
+
+* Improved the error message coming from the client `register` and `signIn` functions
+* Example: added an error message to the Register and SignIn pages to show the improved error message
+* Docs: updated docs for `register` and `signIn` to illustrate how to use the error message
+
+
 ## Version `0.4.8`
 
 * Replaced `libsodium-wrappers-sumo` with `libsodium`

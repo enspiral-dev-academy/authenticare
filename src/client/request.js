@@ -19,8 +19,9 @@ export default function (endpoint, data, request = consume) {
     request(endpoint, headers, data)
       .then((res) => resolve(saveAuthToken(res.body?.token)))
       .catch((err) => {
+        const authErrorMessage = err.response?.body?.errorType
         const errMessage = err.response?.body?.error?.title
-        reject(new Error(errMessage || err.message))
+        reject(new Error(authErrorMessage || errMessage || err.message))
       })
   })
 }

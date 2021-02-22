@@ -25,13 +25,18 @@ Promise that resolves to the decoded token.
 import React, { useState } from 'react'
 import { register, isAuthenticated } from 'authenticare/client'
 
-import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { GridForm, ColOne, ColTwo, Button, Error } from './Styled'
 
 export default function Register (props) {
+  const [error, setError] = useState('')
   const [form, setForm] = useState({
     username: '',
     password: ''
   })
+
+  const hideError = () => {
+    setError('')
+  }
 
   function handleChange (e) {
     const { name, value } = e.target
@@ -50,10 +55,18 @@ export default function Register (props) {
           props.history.push('/')
         }
       })
+      .catch(err => {
+        if (err.message === 'USERNAME_UNAVAILABLE') {
+          setError('Username is not available')
+        }
+      })
   }
 
   return (
     <>
+      <Error onClick={hideError}>
+        { error && `Error: ${error}` }
+      </Error>
       <h2>Register</h2>
       <GridForm onSubmit={handleSubmit}>
         <ColOne>Username:</ColOne>

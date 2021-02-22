@@ -2,13 +2,18 @@ import React, { useState } from 'react'
 import { register, isAuthenticated } from 'authenticare/client'
 
 import { baseApiUrl as baseUrl } from '../config'
-import { GridForm, ColOne, ColTwo, Button } from './Styled'
+import { GridForm, ColOne, ColTwo, Button, Error } from './Styled'
 
 function Register (props) {
+  const [error, setError] = useState('')
   const [form, setForm] = useState({
     username: '',
     password: ''
   })
+
+  const hideError = () => {
+    setError('')
+  }
 
   function handleChange (e) {
     const { name, value } = e.target
@@ -28,10 +33,18 @@ function Register (props) {
         }
         return null
       })
+      .catch(err => {
+        if (err.message === 'USERNAME_UNAVAILABLE') {
+          setError('Username is not available')
+        }
+      })
   }
 
   return (
     <>
+      <Error onClick={hideError}>
+        { error && `Error: ${error}` }
+      </Error>
       <h2>Register</h2>
       <GridForm onSubmit={handleSubmit}>
         <ColOne htmlFor='username'>Username:</ColOne>

@@ -24,7 +24,7 @@ function applyAuthRoutes (router, functions) {
     functions.userExists(req.body.username)
       .then(exists => {
         if (exists) {
-          return res.status(400).send({
+          return res.status(400).json({
             errorType: USERNAME_UNAVAILABLE
           })
         }
@@ -32,7 +32,7 @@ function applyAuthRoutes (router, functions) {
         return functions.createUser(req.body).then(() => next())
       })
       .catch(err => {
-        res.status(500).send({
+        res.status(500).json({
           errorType: DATABASE_ERROR,
           error: err.message
         })
@@ -55,12 +55,12 @@ function applyAuthRoutes (router, functions) {
       })
       .catch(err => {
         if (err.message === INVALID_CREDENTIALS) {
-          return res.status(400).send({
+          return res.status(400).json({
             errorType: INVALID_CREDENTIALS
           })
         }
 
-        res.status(500).send({
+        res.status(500).json({
           errorType: DATABASE_ERROR,
           error: err.message
         })
