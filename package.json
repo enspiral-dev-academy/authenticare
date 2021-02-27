@@ -1,6 +1,6 @@
 {
   "name": "authenticare",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "description": "A JWT helper library for full-stack Node apps",
   "main": "index.js",
   "scripts": {

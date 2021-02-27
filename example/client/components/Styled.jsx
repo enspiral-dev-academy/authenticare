@@ -16,6 +16,7 @@ export const ColTwo = styled.input`
 `
 
 export const Button = styled.button`
+  display: block;
   grid-column: 2;
   width: 50%;
 `

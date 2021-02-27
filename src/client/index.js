@@ -1,5 +1,6 @@
 import request from './request'
-import { signInUrl, registerUrl } from '../endpoints'
+import { isValidEmail } from '../shared/isValidEmail'
+import { signInUrl, registerUrl, resetPasswordUrl } from '../endpoints'
 
 import {
   isAuthenticated,
@@ -12,6 +13,7 @@ module.exports = {
   signIn,
   logOff,
   register,
+  resetPassword,
   isAuthenticated,
   getDecodedToken,
   getEncodedToken,
@@ -28,6 +30,17 @@ function signIn (user, options) {
   const baseUrl = options && options.baseUrl
   const url = `${baseUrl || ''}${signInUrl}`
   return request(url, user)
+}
+
+function resetPassword (email, options) {
+  const baseUrl = options && options.baseUrl
+  const url = `${baseUrl || ''}${resetPasswordUrl}`
+  if (!isValidEmail(email)) {
+    return Promise.reject(
+      new Error("That doesn't appear to be a valid email address")
+    )
+  }
+  return request(url, email)
 }
 
 function getAuthorizationHeader () {
