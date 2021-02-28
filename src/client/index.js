@@ -1,6 +1,10 @@
 import request from './request'
-import { isValidEmail } from '../shared/isValidEmail'
-import { signInUrl, registerUrl, resetPasswordUrl } from '../endpoints'
+import {
+  isValidEmail,
+  signInUrl,
+  registerUrl,
+  resetPasswordUrl
+} from '../shared'
 
 import {
   isAuthenticated,
@@ -40,7 +44,7 @@ function resetPassword (email, options) {
       new Error("That doesn't appear to be a valid email address")
     )
   }
-  return request(url, email)
+  return request(url, { email })
 }
 
 function getAuthorizationHeader () {

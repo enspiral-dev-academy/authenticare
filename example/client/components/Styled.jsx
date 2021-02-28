@@ -25,3 +25,8 @@ export const Error = styled.div`
   color: red;
   cursor: pointer;
 `
+
+export const Info = styled.div`
+  color: green;
+  cursor: pointer;
+`

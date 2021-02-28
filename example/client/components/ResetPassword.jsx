@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { resetPassword, isAuthenticated } from 'authenticare/client'
+import { resetPassword } from 'authenticare/client'
 
 import { baseApiUrl as baseUrl } from '../config'
-import { GridForm, ColOne, ColTwo, Button, Error } from './Styled'
+import { GridForm, ColOne, ColTwo, Button, Error, Info } from './Styled'
 
 function ResetPassword (props) {
+  const [info, setInfo] = useState('')
   const [error, setError] = useState('')
   const [email, setEmail] = useState('')
 
@@ -16,11 +17,20 @@ function ResetPassword (props) {
     e.preventDefault()
     return resetPassword(email, { baseUrl })
       .then((token) => {
-        if (isAuthenticated()) {
-          props.history.push('/')
-        }
+        setInfo('Please check your email to finish resetting your password')
         return null
       })
+      .catch((err) => {
+        setError(err.message)
+      })
+  }
+
+  const hideError = () => {
+    setError('')
+  }
+
+  const hideInfo = () => {
+    setInfo('')
   }
 
   return (
@@ -28,6 +38,9 @@ function ResetPassword (props) {
       <Error onClick={hideError}>
         { error && `Error: ${error}` }
       </Error>
+      <Info onClick={hideInfo}>
+        { info && `Error: ${info}` }
+      </Info>
       <h2>Reset Password</h2>
       <GridForm onSubmit={handleSubmit}>
         <ColOne htmlFor='email'>Email:</ColOne>

@@ -1,21 +1,12 @@
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const sendEmail = require('./sendEmail')
 
-export default sendPasswordResetEmail (email) {
-  const msg = {
-    to: email, // Change to your recipient
-    from: 'sendgrid@dons.dev', // Change to your verified sender
-    subject: 'Reset password for Authenticare example',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  }
+module.exports = {
+  sendPasswordResetEmail
+}
 
-  sgMail
-    .send(msg)
+function sendPasswordResetEmail (user, token) {
+  return sendEmail(user.email, token)
     .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error) => {
-      console.error(error)
+      return null
     })
 }
