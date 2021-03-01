@@ -1,4 +1,6 @@
 import request from './request'
+import consume from './consume'
+
 import {
   isValidEmail,
   signInUrl,
@@ -39,12 +41,18 @@ function signIn (user, options) {
 function resetPassword (email, options) {
   const baseUrl = options && options.baseUrl
   const url = `${baseUrl || ''}${resetPasswordUrl}`
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  }
+
   if (!isValidEmail(email)) {
     return Promise.reject(
       new Error("That doesn't appear to be a valid email address")
     )
   }
-  return request(url, { email })
+
+  return consume(url, headers, { email })
 }
 
 function getAuthorizationHeader () {

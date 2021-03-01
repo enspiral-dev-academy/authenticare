@@ -39,7 +39,7 @@ function ResetPassword (props) {
         { error && `Error: ${error}` }
       </Error>
       <Info onClick={hideInfo}>
-        { info && `Error: ${info}` }
+        { info && `Info: ${info}` }
       </Info>
       <h2>Reset Password</h2>
       <GridForm onSubmit={handleSubmit}>

@@ -24,10 +24,10 @@ module.exports = function sendEmail (email, token) {
   return sgMail
     .send(msgOptions)
     .then(() => {
-      console.log('Email sent')
+      console.info(`Email sent to ${email}`)
       return null
     })
     .catch((error) => {
-      console.error(error)
+      console.error(JSON.stringify(error, null, 2))
     })
 }

@@ -61,8 +61,6 @@ function applyAuthRoutes (router, functions) {
         return null
       })
       .catch(err => {
-        console.log('there')
-        console.error(JSON.stringify(err, null, 2))
         return res.status(500).json({
           errorType: START_RESET_PASSWORD,
           message: err.message
