@@ -7,10 +7,10 @@ POSTs a new user registration request to the `/auth/register` route on the serve
 
 ## Parameters
 
-`user`: object with at least two string properties:
+* `user`: object with at least two string properties:
     - `username`: string
     - `password`: string
-`options`: optional object to configure request
+* `options`: optional object to configure request
     - `baseUrl`: string (e.g. `http://localhost:3000/api/v1`)
 
 
