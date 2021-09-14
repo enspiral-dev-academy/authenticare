@@ -6,6 +6,7 @@ const testSecret = 'this-is-a-test-secret'
 module.exports = {
   getIssuer,
   createToken,
+  decodeToken,
   getTokenDecoder
 }
 
@@ -42,6 +43,10 @@ function createToken (
   const token = { ...user }
   delete token.hash
   return jwt.sign(token, secret, { expiresIn })
+}
+
+function decodeToken (token, secret = process.env.JWT_SECRET) {
+  return jwt.verify(token, secret)
 }
 
 function getSecret (req, payload, done) {

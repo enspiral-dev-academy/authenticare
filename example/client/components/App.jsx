@@ -6,6 +6,7 @@ import Fruits from './Fruits'
 import Register from './Register'
 import SignIn from './SignIn'
 import ResetPassword from './ResetPassword'
+import NewPassword from './NewPassword'
 
 export default function App () {
   return (
@@ -15,6 +16,7 @@ export default function App () {
       <Route path='/register' component={Register} />
       <Route path='/signin' component={SignIn} />
       <Route path='/reset-password' component={ResetPassword} />
+      <Route exact path='/auth/reset-password/:token' component={NewPassword} />
     </Router>
   )
 }

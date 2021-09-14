@@ -20,6 +20,7 @@ module.exports = {
   logOff,
   register,
   resetPassword,
+  setNewPassword,
   isAuthenticated,
   getDecodedToken,
   getEncodedToken,
@@ -53,6 +54,23 @@ function resetPassword (email, options) {
   }
 
   return consume(url, headers, { email })
+}
+
+function setNewPassword (password1, password2, token, options) {
+  const baseUrl = options && options.baseUrl
+  const url = `${baseUrl || ''}${resetPasswordUrl}/${token}`
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  }
+
+  if (password1 !== password2) {
+    return Promise.reject(
+      new Error("Passwords don't match")
+    )
+  }
+
+  return consume(url, headers, { password: password1, token })
 }
 
 function getAuthorizationHeader () {

@@ -26,7 +26,8 @@ export default function Nav () {
           <NavLink to='/signin'>Sign in</NavLink>
         </IfNotAuthenticated>
       </NavGroup>
-      <h1>Fruit FTW!</h1>
+      <h1>Enterprise Fruit Management</h1>
+      <p>At Foods United National Industries we pride ourselves on delivering the highest quality fruits to our customers. The Enterprise Fruit Management application provides an essential means to ensure accurate Yearly Ubiquity Metric values.</p>
     </>
   )
 }

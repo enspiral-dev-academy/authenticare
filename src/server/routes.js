@@ -1,7 +1,7 @@
 const express = require('express')
 
 const hash = require('./hash')
-const token = require('./token')
+const { getIssuer, createToken, decodeToken } = require('./token')
 const {
   registerUrl,
   signInUrl,
@@ -21,7 +21,7 @@ module.exports = {
 
 // TODO: Refactor this function
 function applyAuthRoutes (router, functions) {
-  const issueToken = token.getIssuer(functions.getUserByName)
+  const issueToken = getIssuer(functions.getUserByName)
 
   router.use(express.json())
   router.post(resetPasswordUrl, startResetPassword)
@@ -43,7 +43,7 @@ function applyAuthRoutes (router, functions) {
         if (!user) throw new Error('Could not find user with that email address')
 
         // create reset token
-        const passwordToken = token.createToken(user)
+        const passwordToken = createToken(user)
         return { user, passwordToken }
       })
       .then(({ user, passwordToken }) => {
@@ -69,10 +69,18 @@ function applyAuthRoutes (router, functions) {
   }
 
   function finishResetPassword (req, res, next) {
-    // verify req.params.token
-    // ensure reset token hasn't expired
+    const { password, token } = req.body
+    console.log(password, token)
+    // verify req.params.token including expiration
+    try {
+      const jwt = decodeToken(token)
+      console.log('decoded jwt:', JSON.stringify(jwt, null, 2))
+    } catch (err) {
+      console.error(err)
+    }
     // find and remove token in reset_tokens table
     // update the users password
+    res.send({})
   }
 
   function register (req, res, next) {
